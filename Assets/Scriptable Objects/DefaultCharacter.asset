@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 076f23e7e72808147bfcd12183088cc3, type: 3}
+  m_Name: DefaultCharacter
+  m_EditorClassIdentifier: 
+  name: Default Dan
+  height: 1
+  weight: 1
+  animationController: {fileID: 9100000, guid: 930cead7a31bf1449bb3198a9bae9bc8, type: 2}
+  pitchOfVoice: 1
+  skinColor: {r: 0.8113208, g: 0.24110004, b: 0.24110004, a: 1}
+  hairstyle:
+    partColor: {r: 0.8301887, g: 0.3250267, b: 0.3250267, a: 1}
+    partMesh: {fileID: 0}
+  eyes:
+    partColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
+    partMesh: {fileID: 2798877529605953264, guid: 7dd477a5e75697e418c551bbdb685fda,
+      type: 3}
+  nose:
+    partColor: {r: 1, g: 0.33490568, b: 0.33490568, a: 1}
+    partMesh: {fileID: -286052205278141361, guid: f5828e00d328a4e4eb2724b0dddf77a3,
+      type: 3}
+  hat:
+    partColor: {r: 0, g: 0, b: 0, a: 0}
+    partMesh: {fileID: 0}
+  facialHair:
+    partColor: {r: 0, g: 0, b: 0, a: 0}
+    partMesh: {fileID: 0}
+  faceAccessory:
+    partColor: {r: 0, g: 0, b: 0, a: 0}
+    partMesh: {fileID: 0}
+  shirt:
+    partColor: {r: 1, g: 0.44173118, b: 0.051886797, a: 1}
+    partMesh: {fileID: 4072344190528243298, guid: 0e3cbfc988b5a2446b3bfc42354943d8,
+      type: 3}
+  backAccessory:
+    partColor: {r: 0, g: 0, b: 0, a: 0}
+    partMesh: {fileID: 0}
+  gloves:
+    partColor: {r: 0, g: 0, b: 0, a: 0}
+    partMesh: {fileID: 0}
+  pants:
+    partColor: {r: 0.38431358, g: 1, b: 0, a: 1}
+    partMesh: {fileID: 1543909213277224155, guid: 8581cfe4ecbc1ad47a354f7943b958f2,
+      type: 3}
+  waistAccessory:
+    partColor: {r: 0, g: 0, b: 0, a: 0}
+    partMesh: {fileID: 0}
+  shoes:
+    partColor: {r: 0, g: 0, b: 0, a: 1}
+    partMesh: {fileID: 5055432204510056039, guid: b1333e92cc5facd43b26687e392d866b,
+      type: 3}
