@@ -81,11 +81,16 @@ public class CharacterCreator : MonoBehaviour
 	[SerializeField] private Slider weightSlider = null;
 
 	/// <summary>
+	/// The voice pitch slider.
+	/// </summary>
+	[Tooltip("The voice pitch slider.")]
+	[SerializeField] private Slider voicePitchSlider = null;
+
+	/// <summary>
 	/// The skin color picker.
 	/// </summary>
 	[Tooltip("The skin color picker.")]
 	[SerializeField] private ColorPicker skinColorPicker = null;
-
 	#endregion
 	#region Public
 
@@ -129,6 +134,7 @@ public class CharacterCreator : MonoBehaviour
 		nameInputField.text = currentCharacterInfo.name;
 		heightSlider.value = currentCharacterInfo.height;
 		weightSlider.value = currentCharacterInfo.weight;
+		voicePitchSlider.value = currentCharacterInfo.pitchOfVoice;
 
 		skinColorPicker.AssignColor(currentCharacter.characterInfo.skinColor);
 		skinColorPicker.SendChangedEvent();
@@ -197,11 +203,41 @@ public class CharacterCreator : MonoBehaviour
 	}
 
 	/// <summary>
+	/// Sets the characters voice pitch.
+	/// </summary>
+	public void SetVoicePitch()
+	{
+		currentCharacter.characterInfo.pitchOfVoice = voicePitchSlider.value;
+		ReloadCharacter();
+	}
+
+	/// <summary>
 	/// Sets the character skin color.
 	/// </summary>
 	public void SetSkinColor()
 	{
 		currentCharacter.characterInfo.skinColor = skinColorPicker.CurrentColor;
+		ReloadCharacter();
+	}
+
+	/// <summary>
+	/// Changes the character animation index.
+	/// </summary>
+	/// <param name="changeValue">What to change the index by.</param>
+	public void ChangeAnimationIndex(int changeValue)
+	{
+		changeValue += currentCharacter.characterInfo.animationControllerIndex;
+
+		if (changeValue < 0)
+		{
+			changeValue = currentCharacter.characterPartIndex.animatorControllers.Length - 1;
+		}
+		else if (changeValue == currentCharacter.characterPartIndex.animatorControllers.Length)
+		{
+			changeValue = 0;
+		}
+
+		currentCharacter.characterInfo.animationControllerIndex = changeValue;
 		ReloadCharacter();
 	}
 	#endregion

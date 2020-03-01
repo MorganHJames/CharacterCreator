@@ -73,12 +73,6 @@ public class Character : MonoBehaviour
 	/// </summary>
 	private CharacterStates characterState = CharacterStates.Idle;
 
-	/// <summary>
-	/// The character part index.
-	/// </summary>
-	[Tooltip("The character part index.")]
-	[SerializeField] private CharacterPartIndex characterPartIndex = null;
-
 	[Header("Basic Info")]
 	/// <summary>
 	/// The Character's animator.
@@ -168,6 +162,12 @@ public class Character : MonoBehaviour
 	[SerializeField] private GameObject shoesParent = null;
 	#endregion
 	#region Public
+	/// <summary>
+	/// The character part index.
+	/// </summary>
+	[Tooltip("The character part index.")]
+	public CharacterPartIndex characterPartIndex = null;
+
 	/// <summary>
 	/// The characters info.
 	/// </summary>
