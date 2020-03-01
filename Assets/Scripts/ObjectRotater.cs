@@ -26,12 +26,6 @@ public class ObjectRotater : MonoBehaviour
 	[SerializeField] private GameObject objectToRotate = null;
 
 	/// <summary>
-	/// The scene camera.
-	/// </summary>
-	[Tooltip("The scene camera.")]
-	[SerializeField] private Camera cam = null;
-
-	/// <summary>
 	/// The bounding transform.
 	/// </summary>
 	[Tooltip("The bounding transform.")]

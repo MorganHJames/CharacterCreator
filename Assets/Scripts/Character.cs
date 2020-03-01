@@ -159,7 +159,7 @@ public class Character : MonoBehaviour
 	/// The Character's waist accessory.
 	/// </summary>
 	[Tooltip("The Character's waist accessory.")]
-	[SerializeField] private SkinnedMeshRenderer waistAccessory = null;
+	[SerializeField] private GameObject waistAccessoryParent = null;
 
 	/// <summary>
 	/// The Character's shoes.
@@ -272,14 +272,54 @@ public class Character : MonoBehaviour
 				break;
 		}
 	}
+	#endregion
+	#region Public
+	/// <summary>
+	/// Plays the desired animation.
+	/// </summary>
+	/// <param name="animationName">Plays the desired animation.</param>
+	public void PlayAnimation(string animationName)
+	{
+		animator.Play(animationName);
+	}
+
+	/// <summary>
+	/// Indicate to the character to go to the alert position.
+	/// </summary>
+	/// <param name="alertPosition">The position that the character should run to and remain at alert.</param>
+	public void Alert(Vector3 alertPosition)
+	{
+		positionToLookAt = Quaternion.LookRotation(alertPosition - new Vector3(transform.position.x, 0.0f, transform.position.z));
+		positionHeadedTo = alertPosition;
+		characterState = CharacterStates.AlertTurning;
+	}
+
+	/// <summary>
+	/// Makes the character just stand there.
+	/// </summary>
+	public void Idle()
+	{
+		characterState = CharacterStates.Alert;
+	}
+
+	/// <summary>
+	/// Indicate to the character to stop being alert.
+	/// </summary>
+	public void StopAlert()
+	{
+		remainingIdleTime = Random.Range(0.0f, maxIdleTime);
+		animator.Play("Idle");
+		characterState = CharacterStates.Idle;
+	}
 
 	/// <summary>
 	/// Applies the character info to the character.
 	/// </summary>
-	private void ApplyCharacterInfo()
+	public void ApplyCharacterInfo()
 	{
-		transform.localScale.Set(transform.localScale.x, characterInfo.height, transform.localScale.z);
-		transform.localScale.Set(characterInfo.weight, transform.localScale.y, characterInfo.weight);
+		transform.localScale = new Vector3(transform.localScale.x, characterInfo.height, transform.localScale.z);
+
+		transform.localScale= new Vector3(characterInfo.weight, transform.localScale.y, characterInfo.weight);
 
 		animator.runtimeAnimatorController = characterPartIndex.animatorControllers[characterInfo.animationControllerIndex];
 
@@ -347,8 +387,8 @@ public class Character : MonoBehaviour
 
 		if (characterPartIndex.waistAccessorys.Length > 0)
 		{
-			waistAccessory.sharedMesh = characterPartIndex.waistAccessorys[characterInfo.waistAccessoryIndex];
-			waistAccessory.material.color = characterInfo.waistAccessoryColor;
+			GameObject waistAccessory = Instantiate(characterPartIndex.waistAccessorys[characterInfo.waistAccessoryIndex], waistAccessoryParent.transform);
+			waistAccessory.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.waistAccessoryColor;
 		}
 
 		if (characterPartIndex.shoes.Length > 0)
@@ -356,45 +396,6 @@ public class Character : MonoBehaviour
 			GameObject shoes = Instantiate(characterPartIndex.shoes[characterInfo.shoesIndex], shoesParent.transform);
 			shoes.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.shoesColor;
 		}
-	}
-	#endregion
-	#region Public
-	/// <summary>
-	/// Plays the desired animation.
-	/// </summary>
-	/// <param name="animationName">Plays the desired animation.</param>
-	public void PlayAnimation(string animationName)
-	{
-		animator.Play(animationName);
-	}
-
-	/// <summary>
-	/// Indicate to the character to go to the alert position.
-	/// </summary>
-	/// <param name="alertPosition">The position that the character should run to and remain at alert.</param>
-	public void Alert(Vector3 alertPosition)
-	{
-		positionToLookAt = Quaternion.LookRotation(alertPosition - new Vector3(transform.position.x, 0.0f, transform.position.z));
-		positionHeadedTo = alertPosition;
-		characterState = CharacterStates.AlertTurning;
-	}
-
-	/// <summary>
-	/// Makes the character just stand there.
-	/// </summary>
-	public void Idle()
-	{
-		characterState = CharacterStates.Alert;
-	}
-
-	/// <summary>
-	/// Indicate to the character to stop being alert.
-	/// </summary>
-	public void StopAlert()
-	{
-		remainingIdleTime = Random.Range(0.0f, maxIdleTime);
-		animator.Play("Idle");
-		characterState = CharacterStates.Idle;
 	}
 	#endregion
 	#endregion

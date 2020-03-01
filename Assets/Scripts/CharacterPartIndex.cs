@@ -90,10 +90,10 @@ public class CharacterPartIndex : ScriptableObject
 	public GameObject[] pants;
 
 	/// <summary>
-	/// All of the waist accessory meshes.
+	/// All of the waist accessory prefabs.
 	/// </summary>
-	[Tooltip("All of the waist accessory meshes.")]
-	public Mesh[] waistAccessorys;
+	[Tooltip("All of the waist accessory prefabs.")]
+	public GameObject[] waistAccessorys;
 
 	/// <summary>
 	/// All of the shoes prefabs.

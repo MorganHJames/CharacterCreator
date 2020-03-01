@@ -14,25 +14,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatorControllers:
   - {fileID: 9100000, guid: 930cead7a31bf1449bb3198a9bae9bc8, type: 2}
-  hairstyles: []
+  hairstyles:
+  - {fileID: 0}
   eyes:
+  - {fileID: 0}
   - {fileID: 2798877529605953264, guid: 7dd477a5e75697e418c551bbdb685fda, type: 3}
   - {fileID: -4757887474759778506, guid: 6db8486a603b7f541a6112ef0e6ddc2b, type: 3}
   noses:
+  - {fileID: 0}
   - {fileID: -286052205278141361, guid: f5828e00d328a4e4eb2724b0dddf77a3, type: 3}
   - {fileID: 3368537542589874233, guid: c413fe929a49919428970a8488662023, type: 3}
-  hats: []
-  facialHairs: []
-  faceAccessorys: []
+  hats:
+  - {fileID: 0}
+  facialHairs:
+  - {fileID: 0}
+  faceAccessorys:
+  - {fileID: 0}
   shirts:
-  - {fileID: 7203701168457762452, guid: 1671ca6b70dd26f44ac25a428de9f8ea, type: 3}
-  - {fileID: 5252931616847402724, guid: e61078e8855fcfa4bbf0e5523075353a, type: 3}
-  backAccessorys: []
-  gloves: []
+  - {fileID: 1382537008103442275, guid: 99cce96b22374d0439a6c16165c0d5df, type: 3}
+  - {fileID: 6505792859646335341, guid: 16c273ad9e95107469661a8a496734b5, type: 3}
+  - {fileID: 6176751136991741480, guid: d793b705da800a848929f8f6ee23b87c, type: 3}
+  backAccessorys:
+  - {fileID: 1382537008103442275, guid: 99cce96b22374d0439a6c16165c0d5df, type: 3}
+  - {fileID: 2382504996061670770, guid: cec90134548a978468efe7e30ed3e977, type: 3}
+  - {fileID: 9068106163776132759, guid: 201e144314ba58a4b85902a041f394c9, type: 3}
+  gloves:
+  - {fileID: 1382537008103442275, guid: 99cce96b22374d0439a6c16165c0d5df, type: 3}
+  - {fileID: 6622395034561810590, guid: 49d54753cc4060040938c01c86c6660a, type: 3}
+  - {fileID: 5223994306808923808, guid: e51d56de1c73ae448bd4fbd0734749d2, type: 3}
   pants:
+  - {fileID: 1382537008103442275, guid: 99cce96b22374d0439a6c16165c0d5df, type: 3}
   - {fileID: 8442798378096167135, guid: 8058a7be4d0945340a5bd34ba7818468, type: 3}
   - {fileID: 7533598330530173555, guid: 4ac8b3edc275e8e40aa860f752afdeb3, type: 3}
-  waistAccessorys: []
+  waistAccessorys:
+  - {fileID: 1382537008103442275, guid: 99cce96b22374d0439a6c16165c0d5df, type: 3}
+  - {fileID: 7586496638323378184, guid: 208f0b61235e0e2478df51f03304e218, type: 3}
+  - {fileID: 3999024210454922987, guid: a5e87ca0bed77c945a5db1f864eb7ef5, type: 3}
+  - {fileID: 273137824859061296, guid: 70c42a0cd1445924b92776b4f660e778, type: 3}
   shoes:
+  - {fileID: 1382537008103442275, guid: 99cce96b22374d0439a6c16165c0d5df, type: 3}
   - {fileID: 7506748654455327772, guid: bcc62c2d3ea659d47a86156f4ba90fb9, type: 3}
   - {fileID: 5682432177021468225, guid: 147f6f3e2d4f11945863593232ee2941, type: 3}

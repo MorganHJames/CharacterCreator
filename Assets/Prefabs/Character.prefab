@@ -1402,7 +1402,7 @@ MonoBehaviour:
   backAccessoryParent: {fileID: 4591394053673808758}
   glovesParent: {fileID: 6442724767630910258}
   pantsParent: {fileID: 7651406551795106422}
-  waistAccessory: {fileID: 5631550958458679314}
+  waistAccessoryParent: {fileID: 6565884180974277632}
   shoesParent: {fileID: 3719464234724625320}
   characterInfo: {fileID: 0}
 --- !u!1 &6442724767630910258
@@ -1474,7 +1474,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6561924993640323200}
-  - component: {fileID: 5631550958458679314}
   m_Layer: 0
   m_Name: Wasit Accessory
   m_TagString: Untagged
@@ -1489,91 +1488,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6565884180974277632}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.775044, y: 0.7750445, z: 0.7750445}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 881162660479730701}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!137 &5631550958458679314
-SkinnedMeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6565884180974277632}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: b5c5560842203ec4cb15150d6e637fea, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  serializedVersion: 2
-  m_Quality: 0
-  m_UpdateWhenOffscreen: 0
-  m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 0}
-  m_Bones:
-  - {fileID: 218646431911073157}
-  - {fileID: 9115222510031217381}
-  - {fileID: 3844940404774049394}
-  - {fileID: 8100456769527012885}
-  - {fileID: 8332437141190923781}
-  - {fileID: 5533826513432544141}
-  - {fileID: 6700953587900656672}
-  - {fileID: 7556428413015004242}
-  - {fileID: 7562988841255883252}
-  - {fileID: 5046270937284262037}
-  - {fileID: 8735404509370627089}
-  - {fileID: 2900397463297881261}
-  - {fileID: 3174365701530705359}
-  - {fileID: 4796223607316346475}
-  - {fileID: 2572933629052378325}
-  - {fileID: 239902095174357108}
-  - {fileID: 6248017293634955741}
-  - {fileID: 1528331178577366301}
-  - {fileID: 4107580220836784791}
-  - {fileID: 6641642697289059785}
-  - {fileID: 4940510159869389842}
-  - {fileID: 2214934482269726666}
-  - {fileID: 8965795806462441273}
-  - {fileID: 3529829008216524438}
-  - {fileID: 8157183192449706873}
-  - {fileID: 8333996166629438877}
-  - {fileID: 4383291067428981002}
-  - {fileID: 4388125761180091953}
-  m_BlendShapeWeights: []
-  m_RootBone: {fileID: 7562988841255883252}
-  m_AABB:
-    m_Center: {x: -0.004864484, y: -0.03509155, z: 0.03315726}
-    m_Extent: {x: 0.92226064, y: 0.91775966, z: 0.26492968}
-  m_DirtyAABB: 0
 --- !u!1 &6833245994487858185
 GameObject:
   m_ObjectHideFlags: 0
@@ -2067,11 +1988,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9218173688043726475}
-  m_LocalRotation: {x: 0.26905894, y: -0, z: -0, w: 0.96312374}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0.09634344, z: -0.007033994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6700953587900656672}
   m_Father: {fileID: 7562988841255883252}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 31.217001, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
