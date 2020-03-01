@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d35ee1f95bcc07b40ae1845cc30119bf, type: 3}
+  m_Name: CharacterPartIndex
+  m_EditorClassIdentifier: 
+  animatorControllers:
+  - {fileID: 9100000, guid: 930cead7a31bf1449bb3198a9bae9bc8, type: 2}
+  hairstyles: []
+  eyes:
+  - {fileID: 2798877529605953264, guid: 7dd477a5e75697e418c551bbdb685fda, type: 3}
+  - {fileID: -4757887474759778506, guid: 6db8486a603b7f541a6112ef0e6ddc2b, type: 3}
+  noses:
+  - {fileID: -286052205278141361, guid: f5828e00d328a4e4eb2724b0dddf77a3, type: 3}
+  - {fileID: 3368537542589874233, guid: c413fe929a49919428970a8488662023, type: 3}
+  hats: []
+  facialHairs: []
+  faceAccessorys: []
+  shirts:
+  - {fileID: 7203701168457762452, guid: 1671ca6b70dd26f44ac25a428de9f8ea, type: 3}
+  - {fileID: 5252931616847402724, guid: e61078e8855fcfa4bbf0e5523075353a, type: 3}
+  backAccessorys: []
+  gloves: []
+  pants:
+  - {fileID: 8442798378096167135, guid: 8058a7be4d0945340a5bd34ba7818468, type: 3}
+  - {fileID: 7533598330530173555, guid: 4ac8b3edc275e8e40aa860f752afdeb3, type: 3}
+  waistAccessorys: []
+  shoes:
+  - {fileID: 7506748654455327772, guid: bcc62c2d3ea659d47a86156f4ba90fb9, type: 3}
+  - {fileID: 5682432177021468225, guid: 147f6f3e2d4f11945863593232ee2941, type: 3}

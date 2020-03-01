@@ -25,11 +25,6 @@ public class Character : MonoBehaviour
 	private Quaternion positionToLookAt;
 
 	/// <summary>
-	/// The maximum distance the character can walk from world origin.
-	/// </summary>
-	private Vector2 wanderLimit = new Vector2(5.0f, 5.0f);
-
-	/// <summary>
 	/// The max the character can be idle for.
 	/// </summary>
 	private float maxIdleTime = 5f;
@@ -79,107 +74,111 @@ public class Character : MonoBehaviour
 	private CharacterStates characterState = CharacterStates.Idle;
 
 	/// <summary>
-	/// The characters info.
+	/// The character part index.
 	/// </summary>
-	[SerializeField] private CharacterInfo characterInfo = null;
+	[Tooltip("The character part index.")]
+	[SerializeField] private CharacterPartIndex characterPartIndex = null;
 
 	[Header("Basic Info")]
 	/// <summary>
 	/// The Character's animator.
 	/// </summary>
 	[Tooltip("The Character's animator.")]
-	[SerializeField] private Animator animator;
+	[SerializeField] private Animator animator = null;
 
 	/// <summary>
 	/// The Character's body.
 	/// </summary>
 	[Tooltip("The Character's body.")]
-	[SerializeField] private SkinnedMeshRenderer body;
+	[SerializeField] private SkinnedMeshRenderer body = null;
 
 	[Header("Head Parts")]
 	/// <summary>
 	/// The Character's hairstyle.
 	/// </summary>
 	[Tooltip("The Character's hairstyle.")]
-	[SerializeField] private SkinnedMeshRenderer hairstyle;
+	[SerializeField] private SkinnedMeshRenderer hairstyle = null;
 
 	/// <summary>
 	/// The Character's eyes.
 	/// </summary>
 	[Tooltip("The Character's eyes.")]
-	[SerializeField] private SkinnedMeshRenderer eyes;
+	[SerializeField] private SkinnedMeshRenderer eyes = null;
 
 	/// <summary>
 	/// The Character's nose.
 	/// </summary>
 	[Tooltip("The Character's nose.")]
-	[SerializeField] private SkinnedMeshRenderer nose;
+	[SerializeField] private SkinnedMeshRenderer nose = null;
 
 	/// <summary>
 	/// The Character's hat.
 	/// </summary>
 	[Tooltip("The Character's hat.")]
-	[SerializeField] private SkinnedMeshRenderer hat;
+	[SerializeField] private SkinnedMeshRenderer hat = null;
 
 	/// <summary>
 	/// The Character's facial hair.
 	/// </summary>
 	[Tooltip("The Character's facial hair.")]
-	[SerializeField] private SkinnedMeshRenderer facialHair;
+	[SerializeField] private SkinnedMeshRenderer facialHair = null;
 
 	/// <summary>
 	/// The Character's face accessory.
 	/// </summary>
 	[Tooltip("The Character's face accessory.")]
-	[SerializeField] private SkinnedMeshRenderer faceAccessory;
+	[SerializeField] private SkinnedMeshRenderer faceAccessory = null;
 
 	[Header("Torso Parts")]
 	/// <summary>
 	/// The Character's shirt.
 	/// </summary>
 	[Tooltip("The Character's shirt.")]
-	[SerializeField] private SkinnedMeshRenderer shirt;
+	[SerializeField] private GameObject shirtParent = null;
 
 	/// <summary>
 	/// The Character's back accessory.
 	/// </summary>
 	[Tooltip("The Character's back accessory.")]
-	[SerializeField] private SkinnedMeshRenderer backAccessory;
+	[SerializeField] private GameObject backAccessoryParent = null;
 
 	/// <summary>
 	/// The Character's gloves.
 	/// </summary>
 	[Tooltip("The Character's gloves.")]
-	[SerializeField] private SkinnedMeshRenderer gloves;
+	[SerializeField] private GameObject glovesParent = null;
 
 	[Header("Bottom Parts")]
 	/// <summary>
 	/// The Character's pants.
 	/// </summary>
 	[Tooltip("The Character's pants.")]
-	[SerializeField] private SkinnedMeshRenderer pants;
+	[SerializeField] private GameObject pantsParent = null;
 
 	/// <summary>
 	/// The Character's waist accessory.
 	/// </summary>
 	[Tooltip("The Character's waist accessory.")]
-	[SerializeField] private SkinnedMeshRenderer waistAccessory;
+	[SerializeField] private SkinnedMeshRenderer waistAccessory = null;
 
 	/// <summary>
 	/// The Character's shoes.
 	/// </summary>
 	[Tooltip("The Character's shoes.")]
-	[SerializeField] private SkinnedMeshRenderer shoes;
+	[SerializeField] private GameObject shoesParent = null;
 	#endregion
 	#region Public
 	/// <summary>
-	/// Plays the desired animation.
+	/// The characters info.
 	/// </summary>
-	/// <param name="animationName">Plays the desired animation.</param>
-	public void PlayAnimation(string animationName)
-	{
-		animator.Play(animationName);
-	}
+	[Tooltip("The characters info.")]
+	public CharacterInfo characterInfo = null;
+
+	/// <summary>
+	/// The maximum distance the character can walk from world origin.
+	/// </summary>
+	[HideInInspector]
+	public static Vector2 wanderLimit = new Vector2(5.0f, 5.0f);
 	#endregion
 	#endregion
 
@@ -282,48 +281,93 @@ public class Character : MonoBehaviour
 		transform.localScale.Set(transform.localScale.x, characterInfo.height, transform.localScale.z);
 		transform.localScale.Set(characterInfo.weight, transform.localScale.y, characterInfo.weight);
 
-		animator.runtimeAnimatorController = characterInfo.animationController;
+		animator.runtimeAnimatorController = characterPartIndex.animatorControllers[characterInfo.animationControllerIndex];
 
 		body.material.color = characterInfo.skinColor;
 
-		hairstyle.sharedMesh = characterInfo.hairstyle.partMesh;
-		hairstyle.material.color = characterInfo.hairstyle.partColor;
+		if (characterPartIndex.hairstyles.Length > 0)
+		{
+			hairstyle.sharedMesh = characterPartIndex.hairstyles[characterInfo.hairstyleIndex];
+			hairstyle.material.color = characterInfo.hairstyleColor;
+		}
 
-		eyes.sharedMesh = characterInfo.eyes.partMesh;
-		eyes.material.color = characterInfo.eyes.partColor;
+		if (characterPartIndex.eyes.Length > 0)
+		{
+			eyes.sharedMesh = characterPartIndex.eyes[characterInfo.eyesIndex];
+			eyes.material.color = characterInfo.eyeColor;
+		}
 
-		nose.sharedMesh = characterInfo.nose.partMesh;
-		nose.material.color = characterInfo.nose.partColor;
+		if (characterPartIndex.noses.Length > 0)
+		{
+			nose.sharedMesh = characterPartIndex.noses[characterInfo.noseIndex];
+			nose.material.color = characterInfo.noseColor;
+		}
 
-		hat.sharedMesh = characterInfo.hat.partMesh;
-		hat.material.color = characterInfo.hat.partColor;
+		if (characterPartIndex.hats.Length > 0)
+		{
+			hat.sharedMesh = characterPartIndex.hats[characterInfo.hatIndex];
+			hat.material.color = characterInfo.hatColor;
+		}
 
-		facialHair.sharedMesh = characterInfo.facialHair.partMesh;
-		facialHair.material.color = characterInfo.facialHair.partColor;
+		if (characterPartIndex.facialHairs.Length > 0)
+		{
+			facialHair.sharedMesh = characterPartIndex.facialHairs[characterInfo.facialHairIndex];
+			facialHair.material.color = characterInfo.facialHairColor;
+		}
 
-		faceAccessory.sharedMesh = characterInfo.faceAccessory.partMesh;
-		faceAccessory.material.color = characterInfo.faceAccessory.partColor;
+		if (characterPartIndex.faceAccessorys.Length > 0)
+		{
+			faceAccessory.sharedMesh = characterPartIndex.faceAccessorys[characterInfo.faceAccessoryIndex];
+			faceAccessory.material.color = characterInfo.faceAccessoryColor;
+		}
 
-		shirt.sharedMesh = characterInfo.shirt.partMesh;
-		shirt.material.color = characterInfo.shirt.partColor;
+		if (characterPartIndex.shirts.Length > 0)
+		{
+			GameObject shirt = Instantiate(characterPartIndex.shirts[characterInfo.shirtIndex], shirtParent.transform);
+			shirt.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.shirtColor;
+		}
 
-		backAccessory.sharedMesh = characterInfo.backAccessory.partMesh;
-		backAccessory.material.color = characterInfo.backAccessory.partColor;
+		if (characterPartIndex.backAccessorys.Length > 0)
+		{
+			GameObject backAccessory = Instantiate(characterPartIndex.backAccessorys[characterInfo.backAccessoryIndex], backAccessoryParent.transform);
+			backAccessory.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.backAccessoryColor;
+		}
 
-		gloves.sharedMesh = characterInfo.gloves.partMesh;
-		gloves.material.color = characterInfo.gloves.partColor;
+		if (characterPartIndex.gloves.Length > 0)
+		{
+			GameObject gloves = Instantiate(characterPartIndex.gloves[characterInfo.glovesIndex], glovesParent.transform);
+			gloves.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.glovesColor;
+		}
 
-		pants.sharedMesh = characterInfo.pants.partMesh;
-		pants.material.color = characterInfo.pants.partColor;
+		if (characterPartIndex.pants.Length > 0)
+		{
+			GameObject pants = Instantiate(characterPartIndex.pants[characterInfo.pantsIndex], pantsParent.transform);
+			pants.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.pantsColor;
+		}
 
-		waistAccessory.sharedMesh = characterInfo.waistAccessory.partMesh;
-		waistAccessory.material.color = characterInfo.waistAccessory.partColor;
+		if (characterPartIndex.waistAccessorys.Length > 0)
+		{
+			waistAccessory.sharedMesh = characterPartIndex.waistAccessorys[characterInfo.waistAccessoryIndex];
+			waistAccessory.material.color = characterInfo.waistAccessoryColor;
+		}
 
-		shoes.sharedMesh = characterInfo.shoes.partMesh;
-		shoes.material.color = characterInfo.shoes.partColor;
+		if (characterPartIndex.shoes.Length > 0)
+		{
+			GameObject shoes = Instantiate(characterPartIndex.shoes[characterInfo.shoesIndex], shoesParent.transform);
+			shoes.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.shoesColor;
+		}
 	}
 	#endregion
 	#region Public
+	/// <summary>
+	/// Plays the desired animation.
+	/// </summary>
+	/// <param name="animationName">Plays the desired animation.</param>
+	public void PlayAnimation(string animationName)
+	{
+		animator.Play(animationName);
+	}
+
 	/// <summary>
 	/// Indicate to the character to go to the alert position.
 	/// </summary>
@@ -333,6 +377,14 @@ public class Character : MonoBehaviour
 		positionToLookAt = Quaternion.LookRotation(alertPosition - new Vector3(transform.position.x, 0.0f, transform.position.z));
 		positionHeadedTo = alertPosition;
 		characterState = CharacterStates.AlertTurning;
+	}
+
+	/// <summary>
+	/// Makes the character just stand there.
+	/// </summary>
+	public void Idle()
+	{
+		characterState = CharacterStates.Alert;
 	}
 
 	/// <summary>
