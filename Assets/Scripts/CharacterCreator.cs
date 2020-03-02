@@ -19,6 +19,18 @@ public class CharacterCreator : MonoBehaviour
 	#region Variables
 	#region Private
 	/// <summary>
+	/// First name syllables.
+	/// </summary>
+	[Tooltip("First name syllables.")]
+	[SerializeField] private string[] firstNameSyllables = null;
+
+	/// <summary>
+	/// Last name syllables.
+	/// </summary>
+	[Tooltip("Last name syllables.")]
+	[SerializeField] private string[] lastNameSyllables = null;
+
+	/// <summary>
 	/// The character prefab to spawn in.
 	/// </summary>
 	[Tooltip("The character prefab to spawn in.")]
@@ -278,7 +290,7 @@ public class CharacterCreator : MonoBehaviour
 	{
 		if (currentCharacter.characterInfo.name == "")
 		{
-			currentCharacter.characterInfo.name = defaultCharacterInfo.name;
+			currentCharacter.characterInfo.name = RandomName();
 		}
 		currentCharacter.characterInfo.Save();
 		SceneManager.LoadScene("Plaza", LoadSceneMode.Single);
@@ -297,12 +309,110 @@ public class CharacterCreator : MonoBehaviour
 	/// </summary>
 	public void Randomise()
 	{
+		// Basic Info.
+		currentCharacter.characterInfo.name = RandomName();
+		nameInputField.text = currentCharacter.characterInfo.name;
+
 		heightSlider.value = Random.Range(heightSlider.minValue, heightSlider.maxValue);
+		currentCharacter.characterInfo.height = heightSlider.value;
+
 		weightSlider.value = Random.Range(weightSlider.minValue, weightSlider.maxValue);
-		SetBodyScale();
+		currentCharacter.characterInfo.height = heightSlider.value;
+
 		voicePitchSlider.value = Random.Range(voicePitchSlider.minValue, voicePitchSlider.maxValue);
 		SetVoicePitch();
 
+		currentCharacter.characterInfo.animationControllerIndex = Random.Range(0, currentCharacter.characterPartIndex.animatorControllers.Length);
+
+		currentCharacter.characterInfo.skinColor = Random.ColorHSV(0,1,0,1,0,1,1,1);
+		skinColorPicker.CurrentColor = currentCharacter.characterInfo.skinColor;
+
+		// Head Parts.
+		currentCharacter.characterInfo.hairstyleIndex = Random.Range(0, currentCharacter.characterPartIndex.hairstyles.Length);
+		currentCharacter.characterInfo.hairstyleColor = Random.ColorHSV(0, 1, 0, 1, 0, 1, 1, 1);
+		hairColorPicker.CurrentColor = currentCharacter.characterInfo.hairstyleColor;
+
+		currentCharacter.characterInfo.eyesIndex = Random.Range(0, currentCharacter.characterPartIndex.eyes.Length);
+		currentCharacter.characterInfo.eyeColor = Random.ColorHSV(0, 1, 0, 1, 0, 1, 1, 1);
+		eyesColorPicker.CurrentColor = currentCharacter.characterInfo.eyeColor;
+
+		currentCharacter.characterInfo.noseIndex = Random.Range(0, currentCharacter.characterPartIndex.noses.Length);
+		currentCharacter.characterInfo.noseColor = Random.ColorHSV(0, 1, 0, 1, 0, 1, 1, 1);
+		noseColorPicker.CurrentColor = currentCharacter.characterInfo.noseColor;
+
+		currentCharacter.characterInfo.hatIndex = Random.Range(0, currentCharacter.characterPartIndex.hats.Length);
+		currentCharacter.characterInfo.hatColor = Random.ColorHSV(0, 1, 0, 1, 0, 1, 1, 1);
+		hatColorPicker.CurrentColor = currentCharacter.characterInfo.hatColor;
+
+		currentCharacter.characterInfo.facialHairIndex = Random.Range(0, currentCharacter.characterPartIndex.facialHairs.Length);
+		currentCharacter.characterInfo.facialHairColor = Random.ColorHSV(0, 1, 0, 1, 0, 1, 1, 1);
+		facialHairColorPicker.CurrentColor = currentCharacter.characterInfo.facialHairColor;
+
+		currentCharacter.characterInfo.faceAccessoryIndex = Random.Range(0, currentCharacter.characterPartIndex.faceAccessorys.Length);
+		currentCharacter.characterInfo.faceAccessoryColor = Random.ColorHSV(0, 1, 0, 1, 0, 1, 1, 1);
+		faceAccessoryColorPicker.CurrentColor = currentCharacter.characterInfo.faceAccessoryColor;
+
+		currentCharacter.characterInfo.shirtIndex = Random.Range(0, currentCharacter.characterPartIndex.shirts.Length);
+		currentCharacter.characterInfo.shirtColor = Random.ColorHSV(0, 1, 0, 1, 0, 1, 1, 1);
+		shirtColorPicker.CurrentColor = currentCharacter.characterInfo.shirtColor;
+
+		currentCharacter.characterInfo.backAccessoryIndex = Random.Range(0, currentCharacter.characterPartIndex.backAccessorys.Length);
+		currentCharacter.characterInfo.backAccessoryColor = Random.ColorHSV(0, 1, 0, 1, 0, 1, 1, 1);
+		backAccessoryColorPicker.CurrentColor = currentCharacter.characterInfo.backAccessoryColor;
+
+		currentCharacter.characterInfo.glovesIndex = Random.Range(0, currentCharacter.characterPartIndex.gloves.Length);
+		currentCharacter.characterInfo.glovesColor = Random.ColorHSV(0, 1, 0, 1, 0, 1, 1, 1);
+		glovesColorPicker.CurrentColor = currentCharacter.characterInfo.glovesColor;
+
+		currentCharacter.characterInfo.waistAccessoryIndex = Random.Range(0, currentCharacter.characterPartIndex.waistAccessorys.Length);
+		currentCharacter.characterInfo.waistAccessoryColor = Random.ColorHSV(0, 1, 0, 1, 0, 1, 1, 1);
+		waistAccessoryColorPicker.CurrentColor = currentCharacter.characterInfo.waistAccessoryColor;
+
+		currentCharacter.characterInfo.pantsIndex = Random.Range(0, currentCharacter.characterPartIndex.pants.Length);
+		currentCharacter.characterInfo.pantsColor = Random.ColorHSV(0, 1, 0, 1, 0, 1, 1, 1);
+		pantsColorPicker.CurrentColor = currentCharacter.characterInfo.pantsColor;
+
+		currentCharacter.characterInfo.shoesIndex = Random.Range(0, currentCharacter.characterPartIndex.shoes.Length);
+		currentCharacter.characterInfo.shoesColor = Random.ColorHSV(0, 1, 0, 1, 0, 1, 1, 1);
+		shoesColorPicker.CurrentColor = currentCharacter.characterInfo.shoesColor;
+
+		ReloadCharacter();
+	}
+
+	/// <summary>
+	/// Creates a random name.
+	/// </summary>
+	/// <returns>The newly created name.</returns>
+	public string RandomName()
+	{
+		string firstName = "";
+		int numberOfSyllablesInFirstName = Random.Range(2, 4);
+
+		for (int i = 0; i < numberOfSyllablesInFirstName; i++)
+		{
+			firstName += firstNameSyllables[Random.Range(0, firstNameSyllables.Length)];
+		}
+
+		string firstNameLetter = firstName.Substring(0, 1);
+		firstName = firstName.Remove(0, 1);
+		firstNameLetter = firstNameLetter.ToUpper();
+		firstName = firstNameLetter + firstName;
+
+
+		string lastName = "";
+		int numberOfSyllablesInLastName = Random.Range(2, 3);
+
+		for (int i = 0; i < numberOfSyllablesInLastName; i++)
+		{
+			lastName += lastNameSyllables[Random.Range(0, lastNameSyllables.Length)];
+		}
+
+		string lastNameLetter = lastName.Substring(0, 1);
+		lastName = lastName.Remove(0, 1);
+		lastNameLetter = lastNameLetter.ToUpper();
+		lastName = lastNameLetter + lastName;
+
+		return firstName + " " + lastName;
 	}
 
 	/// <summary>
@@ -329,16 +439,6 @@ public class CharacterCreator : MonoBehaviour
 	{
 		currentCharacter.characterInfo.weight = weightSlider.value;
 		currentCharacter.transform.localScale = new Vector3(currentCharacter.characterInfo.weight, transform.localScale.y, currentCharacter.characterInfo.weight);
-	}
-
-	/// <summary>
-	/// Sets the characters weight and height.
-	/// </summary>
-	public void SetBodyScale()
-	{
-		currentCharacter.characterInfo.weight = weightSlider.value;
-		currentCharacter.characterInfo.height = heightSlider.value;
-		currentCharacter.transform.localScale = new Vector3(currentCharacter.characterInfo.weight, currentCharacter.characterInfo.height, currentCharacter.characterInfo.weight);
 	}
 
 	/// <summary>

@@ -32,7 +32,6 @@ MonoBehaviour:
   - {fileID: 0}
   shirts:
   - {fileID: 1382537008103442275, guid: 99cce96b22374d0439a6c16165c0d5df, type: 3}
-  - {fileID: 6505792859646335341, guid: 16c273ad9e95107469661a8a496734b5, type: 3}
   - {fileID: 6176751136991741480, guid: d793b705da800a848929f8f6ee23b87c, type: 3}
   backAccessorys:
   - {fileID: 1382537008103442275, guid: 99cce96b22374d0439a6c16165c0d5df, type: 3}
