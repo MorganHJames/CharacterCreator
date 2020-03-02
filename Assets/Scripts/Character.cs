@@ -363,36 +363,78 @@ public class Character : MonoBehaviour
 
 		if (characterPartIndex.shirts.Length > 0)
 		{
+			if (shirtParent.transform.childCount > 0)
+			{
+				foreach (Transform child in shirtParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
 			GameObject shirt = Instantiate(characterPartIndex.shirts[characterInfo.shirtIndex], shirtParent.transform);
 			shirt.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.shirtColor;
 		}
 
 		if (characterPartIndex.backAccessorys.Length > 0)
 		{
+			if (backAccessoryParent.transform.childCount > 0)
+			{
+				foreach (Transform child in backAccessoryParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
 			GameObject backAccessory = Instantiate(characterPartIndex.backAccessorys[characterInfo.backAccessoryIndex], backAccessoryParent.transform);
 			backAccessory.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.backAccessoryColor;
 		}
 
 		if (characterPartIndex.gloves.Length > 0)
 		{
+			if (glovesParent.transform.childCount > 0)
+			{
+				foreach (Transform child in glovesParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
 			GameObject gloves = Instantiate(characterPartIndex.gloves[characterInfo.glovesIndex], glovesParent.transform);
 			gloves.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.glovesColor;
 		}
 
 		if (characterPartIndex.pants.Length > 0)
 		{
+			if (pantsParent.transform.childCount > 0)
+			{
+				foreach (Transform child in pantsParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
 			GameObject pants = Instantiate(characterPartIndex.pants[characterInfo.pantsIndex], pantsParent.transform);
 			pants.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.pantsColor;
 		}
 
 		if (characterPartIndex.waistAccessorys.Length > 0)
 		{
+			if (waistAccessoryParent.transform.childCount > 0)
+			{
+				foreach (Transform child in waistAccessoryParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
 			GameObject waistAccessory = Instantiate(characterPartIndex.waistAccessorys[characterInfo.waistAccessoryIndex], waistAccessoryParent.transform);
 			waistAccessory.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.waistAccessoryColor;
 		}
 
 		if (characterPartIndex.shoes.Length > 0)
 		{
+			if (shoesParent.transform.childCount > 0)
+			{
+				foreach (Transform child in shoesParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
 			GameObject shoes = Instantiate(characterPartIndex.shoes[characterInfo.shoesIndex], shoesParent.transform);
 			shoes.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.shoesColor;
 		}
