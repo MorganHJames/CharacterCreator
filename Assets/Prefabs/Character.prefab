@@ -1389,7 +1389,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779936572cb75204baaadc448a28964b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPartIndex: {fileID: 11400000, guid: adf48863cbe7c5e42868ab1c5d37e071, type: 2}
   animator: {fileID: 109761396432690696}
   body: {fileID: 4467160483920153643}
   hairstyle: {fileID: 3777827797165648093}
@@ -1404,6 +1403,7 @@ MonoBehaviour:
   pantsParent: {fileID: 7651406551795106422}
   waistAccessoryParent: {fileID: 6565884180974277632}
   shoesParent: {fileID: 3719464234724625320}
+  characterPartIndex: {fileID: 11400000, guid: adf48863cbe7c5e42868ab1c5d37e071, type: 2}
   characterInfo: {fileID: 0}
 --- !u!1 &6442724767630910258
 GameObject:

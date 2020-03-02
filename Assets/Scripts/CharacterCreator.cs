@@ -285,6 +285,27 @@ public class CharacterCreator : MonoBehaviour
 	}
 
 	/// <summary>
+	/// Goes back to the plaza.
+	/// </summary>
+	public void Exit()
+	{
+		SceneManager.LoadScene("Plaza", LoadSceneMode.Single);
+	}
+
+	/// <summary>
+	/// Randomizes the character.
+	/// </summary>
+	public void Randomise()
+	{
+		heightSlider.value = Random.Range(heightSlider.minValue, heightSlider.maxValue);
+		weightSlider.value = Random.Range(weightSlider.minValue, weightSlider.maxValue);
+		SetBodyScale();
+		voicePitchSlider.value = Random.Range(voicePitchSlider.minValue, voicePitchSlider.maxValue);
+		SetVoicePitch();
+
+	}
+
+	/// <summary>
 	/// Changes the character Name.
 	/// </summary>
 	public void ChangeName()
@@ -298,7 +319,7 @@ public class CharacterCreator : MonoBehaviour
 	public void SetHeight()
 	{
 		currentCharacter.characterInfo.height = heightSlider.value;
-		ReloadCharacter();
+		currentCharacter.transform.localScale = new Vector3(transform.localScale.x, currentCharacter.characterInfo.height, transform.localScale.z);
 	}
 
 	/// <summary>
@@ -307,7 +328,17 @@ public class CharacterCreator : MonoBehaviour
 	public void SetWeight()
 	{
 		currentCharacter.characterInfo.weight = weightSlider.value;
-		ReloadCharacter();
+		currentCharacter.transform.localScale = new Vector3(currentCharacter.characterInfo.weight, transform.localScale.y, currentCharacter.characterInfo.weight);
+	}
+
+	/// <summary>
+	/// Sets the characters weight and height.
+	/// </summary>
+	public void SetBodyScale()
+	{
+		currentCharacter.characterInfo.weight = weightSlider.value;
+		currentCharacter.characterInfo.height = heightSlider.value;
+		currentCharacter.transform.localScale = new Vector3(currentCharacter.characterInfo.weight, currentCharacter.characterInfo.height, currentCharacter.characterInfo.weight);
 	}
 
 	/// <summary>
@@ -316,7 +347,6 @@ public class CharacterCreator : MonoBehaviour
 	public void SetVoicePitch()
 	{
 		currentCharacter.characterInfo.pitchOfVoice = voicePitchSlider.value;
-		ReloadCharacter();
 	}
 
 	/// <summary>
@@ -325,7 +355,7 @@ public class CharacterCreator : MonoBehaviour
 	public void SetSkinColor()
 	{
 		currentCharacter.characterInfo.skinColor = skinColorPicker.CurrentColor;
-		ReloadCharacter();
+		currentCharacter.body.material.color = currentCharacter.characterInfo.skinColor;
 	}
 
 	/// <summary>
@@ -334,7 +364,7 @@ public class CharacterCreator : MonoBehaviour
 	public void SetHairColor()
 	{
 		currentCharacter.characterInfo.hairstyleColor = hairColorPicker.CurrentColor;
-		ReloadCharacter();
+		currentCharacter.hairstyle.material.color = currentCharacter.characterInfo.hairstyleColor;
 	}
 
 	/// <summary>
@@ -343,7 +373,7 @@ public class CharacterCreator : MonoBehaviour
 	public void SetEyeColor()
 	{
 		currentCharacter.characterInfo.eyeColor = eyesColorPicker.CurrentColor;
-		ReloadCharacter();
+		currentCharacter.eyes.material.color = currentCharacter.characterInfo.eyeColor;
 	}
 
 	/// <summary>
@@ -352,7 +382,7 @@ public class CharacterCreator : MonoBehaviour
 	public void SetNoseColor()
 	{
 		currentCharacter.characterInfo.noseColor = noseColorPicker.CurrentColor;
-		ReloadCharacter();
+		currentCharacter.nose.material.color = currentCharacter.characterInfo.noseColor;
 	}
 
 	/// <summary>
@@ -361,7 +391,7 @@ public class CharacterCreator : MonoBehaviour
 	public void SetHatColor()
 	{
 		currentCharacter.characterInfo.hatColor = hatColorPicker.CurrentColor;
-		ReloadCharacter();
+		currentCharacter.hat.material.color = currentCharacter.characterInfo.hatColor;
 	}
 
 	/// <summary>
@@ -370,7 +400,7 @@ public class CharacterCreator : MonoBehaviour
 	public void SetFacialHairColor()
 	{
 		currentCharacter.characterInfo.facialHairColor = facialHairColorPicker.CurrentColor;
-		ReloadCharacter();
+		currentCharacter.facialHair.material.color = currentCharacter.characterInfo.facialHairColor;
 	}
 
 	/// <summary>
@@ -379,7 +409,7 @@ public class CharacterCreator : MonoBehaviour
 	public void SetFaceAccessoryColor()
 	{
 		currentCharacter.characterInfo.faceAccessoryColor = faceAccessoryColorPicker.CurrentColor;
-		ReloadCharacter();
+		currentCharacter.faceAccessory.material.color = currentCharacter.characterInfo.faceAccessoryColor;
 	}
 
 	/// <summary>
@@ -388,7 +418,12 @@ public class CharacterCreator : MonoBehaviour
 	public void SetShirtColor()
 	{
 		currentCharacter.characterInfo.shirtColor = shirtColorPicker.CurrentColor;
-		ReloadCharacter();
+
+		SkinnedMeshRenderer skinnedMeshRenderer = currentCharacter.shirtParent.GetComponentInChildren<SkinnedMeshRenderer>();
+		if (skinnedMeshRenderer)
+		{
+			skinnedMeshRenderer.material.color = currentCharacter.characterInfo.shirtColor;
+		}
 	}
 
 	/// <summary>
@@ -397,7 +432,12 @@ public class CharacterCreator : MonoBehaviour
 	public void SetBackAccessoryColor()
 	{
 		currentCharacter.characterInfo.backAccessoryColor = backAccessoryColorPicker.CurrentColor;
-		ReloadCharacter();
+
+		SkinnedMeshRenderer skinnedMeshRenderer = currentCharacter.backAccessoryParent.GetComponentInChildren<SkinnedMeshRenderer>();
+		if (skinnedMeshRenderer)
+		{
+			skinnedMeshRenderer.material.color = currentCharacter.characterInfo.backAccessoryColor;
+		}
 	}
 
 	/// <summary>
@@ -406,7 +446,12 @@ public class CharacterCreator : MonoBehaviour
 	public void SetGlovesColor()
 	{
 		currentCharacter.characterInfo.glovesColor = glovesColorPicker.CurrentColor;
-		ReloadCharacter();
+
+		SkinnedMeshRenderer skinnedMeshRenderer = currentCharacter.glovesParent.GetComponentInChildren<SkinnedMeshRenderer>();
+		if (skinnedMeshRenderer)
+		{
+			skinnedMeshRenderer.material.color = currentCharacter.characterInfo.glovesColor;
+		}
 	}
 
 	/// <summary>
@@ -415,7 +460,12 @@ public class CharacterCreator : MonoBehaviour
 	public void SetWaistAccessoryColor()
 	{
 		currentCharacter.characterInfo.waistAccessoryColor = waistAccessoryColorPicker.CurrentColor;
-		ReloadCharacter();
+
+		SkinnedMeshRenderer skinnedMeshRenderer = currentCharacter.waistAccessoryParent.GetComponentInChildren<SkinnedMeshRenderer>();
+		if (skinnedMeshRenderer)
+		{
+			skinnedMeshRenderer.material.color = currentCharacter.characterInfo.waistAccessoryColor;
+		}
 	}
 
 	/// <summary>
@@ -424,7 +474,12 @@ public class CharacterCreator : MonoBehaviour
 	public void SetPantsColor()
 	{
 		currentCharacter.characterInfo.pantsColor = pantsColorPicker.CurrentColor;
-		ReloadCharacter();
+
+		SkinnedMeshRenderer skinnedMeshRenderer = currentCharacter.pantsParent.GetComponentInChildren<SkinnedMeshRenderer>();
+		if (skinnedMeshRenderer)
+		{
+			skinnedMeshRenderer.material.color = currentCharacter.characterInfo.pantsColor;
+		}
 	}
 
 	/// <summary>
@@ -433,7 +488,12 @@ public class CharacterCreator : MonoBehaviour
 	public void SetShoesColor()
 	{
 		currentCharacter.characterInfo.shoesColor = shoesColorPicker.CurrentColor;
-		ReloadCharacter();
+
+		SkinnedMeshRenderer skinnedMeshRenderer = currentCharacter.shoesParent.GetComponentInChildren<SkinnedMeshRenderer>();
+		if (skinnedMeshRenderer)
+		{
+			skinnedMeshRenderer.material.color = currentCharacter.characterInfo.shoesColor;
+		}
 	}
 
 	/// <summary>
@@ -454,7 +514,7 @@ public class CharacterCreator : MonoBehaviour
 		}
 
 		currentCharacter.characterInfo.animationControllerIndex = changeValue;
-		ReloadCharacter();
+		currentCharacter.animator.runtimeAnimatorController = currentCharacter.characterPartIndex.animatorControllers[currentCharacter.characterInfo.animationControllerIndex];
 	}
 
 	/// <summary>
@@ -475,7 +535,12 @@ public class CharacterCreator : MonoBehaviour
 		}
 
 		currentCharacter.characterInfo.hairstyleIndex = changeValue;
-		ReloadCharacter();
+
+		if (currentCharacter.characterPartIndex.hairstyles.Length > 0)
+		{
+			currentCharacter.hairstyle.sharedMesh = currentCharacter.characterPartIndex.hairstyles[currentCharacter.characterInfo.hairstyleIndex];
+			currentCharacter.hairstyle.material.color = currentCharacter.characterInfo.hairstyleColor;
+		}
 	}
 
 	/// <summary>
@@ -496,7 +561,12 @@ public class CharacterCreator : MonoBehaviour
 		}
 
 		currentCharacter.characterInfo.eyesIndex = changeValue;
-		ReloadCharacter();
+
+		if (currentCharacter.characterPartIndex.hairstyles.Length > 0)
+		{
+			currentCharacter.eyes.sharedMesh = currentCharacter.characterPartIndex.eyes[currentCharacter.characterInfo.eyesIndex];
+			currentCharacter.eyes.material.color = currentCharacter.characterInfo.eyeColor;
+		}
 	}
 
 	/// <summary>
@@ -517,7 +587,12 @@ public class CharacterCreator : MonoBehaviour
 		}
 
 		currentCharacter.characterInfo.noseIndex = changeValue;
-		ReloadCharacter();
+
+		if (currentCharacter.characterPartIndex.noses.Length > 0)
+		{
+			currentCharacter.nose.sharedMesh = currentCharacter.characterPartIndex.noses[currentCharacter.characterInfo.noseIndex];
+			currentCharacter.nose.material.color = currentCharacter.characterInfo.noseColor;
+		}
 	}
 
 	/// <summary>
@@ -538,7 +613,12 @@ public class CharacterCreator : MonoBehaviour
 		}
 
 		currentCharacter.characterInfo.hatIndex = changeValue;
-		ReloadCharacter();
+
+		if (currentCharacter.characterPartIndex.hats.Length > 0)
+		{
+			currentCharacter.hat.sharedMesh = currentCharacter.characterPartIndex.hats[currentCharacter.characterInfo.hatIndex];
+			currentCharacter.hat.material.color = currentCharacter.characterInfo.hatColor;
+		}
 	}
 
 	/// <summary>
@@ -559,7 +639,12 @@ public class CharacterCreator : MonoBehaviour
 		}
 
 		currentCharacter.characterInfo.facialHairIndex = changeValue;
-		ReloadCharacter();
+
+		if (currentCharacter.characterPartIndex.facialHairs.Length > 0)
+		{
+			currentCharacter.facialHair.sharedMesh = currentCharacter.characterPartIndex.facialHairs[currentCharacter.characterInfo.facialHairIndex];
+			currentCharacter.facialHair.material.color = currentCharacter.characterInfo.facialHairColor;
+		}
 	}
 
 	/// <summary>
@@ -580,7 +665,12 @@ public class CharacterCreator : MonoBehaviour
 		}
 
 		currentCharacter.characterInfo.faceAccessoryIndex = changeValue;
-		ReloadCharacter();
+
+		if (currentCharacter.characterPartIndex.faceAccessorys.Length > 0)
+		{
+			currentCharacter.faceAccessory.sharedMesh = currentCharacter.characterPartIndex.faceAccessorys[currentCharacter.characterInfo.faceAccessoryIndex];
+			currentCharacter.faceAccessory.material.color = currentCharacter.characterInfo.faceAccessoryColor;
+		}
 	}
 
 	/// <summary>
@@ -601,7 +691,19 @@ public class CharacterCreator : MonoBehaviour
 		}
 
 		currentCharacter.characterInfo.shirtIndex = changeValue;
-		ReloadCharacter();
+
+		if (currentCharacter.characterPartIndex.shirts.Length > 0)
+		{
+			if (currentCharacter.shirtParent.transform.childCount > 0)
+			{
+				foreach (Transform child in currentCharacter.shirtParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject shirt = Instantiate(currentCharacter.characterPartIndex.shirts[currentCharacter.characterInfo.shirtIndex], currentCharacter.shirtParent.transform);
+			shirt.GetComponentInChildren<SkinnedMeshRenderer>().material.color = currentCharacter.characterInfo.shirtColor;
+		}
 	}
 
 	/// <summary>
@@ -622,7 +724,19 @@ public class CharacterCreator : MonoBehaviour
 		}
 
 		currentCharacter.characterInfo.backAccessoryIndex = changeValue;
-		ReloadCharacter();
+
+		if (currentCharacter.characterPartIndex.backAccessorys.Length > 0)
+		{
+			if (currentCharacter.backAccessoryParent.transform.childCount > 0)
+			{
+				foreach (Transform child in currentCharacter.backAccessoryParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject backAccessory = Instantiate(currentCharacter.characterPartIndex.backAccessorys[currentCharacter.characterInfo.backAccessoryIndex], currentCharacter.backAccessoryParent.transform);
+			backAccessory.GetComponentInChildren<SkinnedMeshRenderer>().material.color = currentCharacter.characterInfo.backAccessoryColor;
+		}
 	}
 
 	/// <summary>
@@ -643,7 +757,19 @@ public class CharacterCreator : MonoBehaviour
 		}
 
 		currentCharacter.characterInfo.glovesIndex = changeValue;
-		ReloadCharacter();
+
+		if (currentCharacter.characterPartIndex.gloves.Length > 0)
+		{
+			if (currentCharacter.glovesParent.transform.childCount > 0)
+			{
+				foreach (Transform child in currentCharacter.glovesParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject gloves = Instantiate(currentCharacter.characterPartIndex.gloves[currentCharacter.characterInfo.glovesIndex], currentCharacter.glovesParent.transform);
+			gloves.GetComponentInChildren<SkinnedMeshRenderer>().material.color = currentCharacter.characterInfo.glovesColor;
+		}
 	}
 
 	/// <summary>
@@ -664,7 +790,19 @@ public class CharacterCreator : MonoBehaviour
 		}
 
 		currentCharacter.characterInfo.waistAccessoryIndex = changeValue;
-		ReloadCharacter();
+
+		if (currentCharacter.characterPartIndex.waistAccessorys.Length > 0)
+		{
+			if (currentCharacter.waistAccessoryParent.transform.childCount > 0)
+			{
+				foreach (Transform child in currentCharacter.waistAccessoryParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject waistAccessory = Instantiate(currentCharacter.characterPartIndex.waistAccessorys[currentCharacter.characterInfo.waistAccessoryIndex], currentCharacter.waistAccessoryParent.transform);
+			waistAccessory.GetComponentInChildren<SkinnedMeshRenderer>().material.color = currentCharacter.characterInfo.waistAccessoryColor;
+		}
 	}
 
 	/// <summary>
@@ -685,7 +823,19 @@ public class CharacterCreator : MonoBehaviour
 		}
 
 		currentCharacter.characterInfo.pantsIndex = changeValue;
-		ReloadCharacter();
+
+		if (currentCharacter.characterPartIndex.pants.Length > 0)
+		{
+			if (currentCharacter.pantsParent.transform.childCount > 0)
+			{
+				foreach (Transform child in currentCharacter.pantsParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject pants = Instantiate(currentCharacter.characterPartIndex.pants[currentCharacter.characterInfo.pantsIndex], currentCharacter.pantsParent.transform);
+			pants.GetComponentInChildren<SkinnedMeshRenderer>().material.color = currentCharacter.characterInfo.pantsColor;
+		}
 	}
 
 	/// <summary>
@@ -706,7 +856,19 @@ public class CharacterCreator : MonoBehaviour
 		}
 
 		currentCharacter.characterInfo.shoesIndex = changeValue;
-		ReloadCharacter();
+
+		if (currentCharacter.characterPartIndex.shoes.Length > 0)
+		{
+			if (currentCharacter.shoesParent.transform.childCount > 0)
+			{
+				foreach (Transform child in currentCharacter.shoesParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject shoes = Instantiate(currentCharacter.characterPartIndex.shoes[currentCharacter.characterInfo.shoesIndex], currentCharacter.shoesParent.transform);
+			shoes.GetComponentInChildren<SkinnedMeshRenderer>().material.color = currentCharacter.characterInfo.shoesColor;
+		}
 	}
 	#endregion
 	#endregion

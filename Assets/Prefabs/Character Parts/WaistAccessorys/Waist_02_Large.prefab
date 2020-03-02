@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3859928750752042531}
   - component: {fileID: 6564906297679946585}
-  - component: {fileID: 234817150534133934}
   m_Layer: 0
   m_Name: Waist_02_Large
   m_TagString: Untagged
@@ -84,18 +83,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &234817150534133934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 273137824859061296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5920548f6e353de40a51a448e9e78706, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &284808285141026901
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6911473640817489340}
   - component: {fileID: 2414689341713682534}
+  - component: {fileID: 7663212233549872604}
   m_Layer: 0
   m_Name: Waist_02
   m_TagString: Untagged
@@ -520,6 +508,18 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.000076800585, y: 0.021518067, z: 0.005127862}
     m_Extent: {x: 0.23641762, y: 0.1041583, z: 0.20408405}
   m_DirtyAABB: 0
+--- !u!114 &7663212233549872604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4019705126683070684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5920548f6e353de40a51a448e9e78706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4942255144788820424
 GameObject:
   m_ObjectHideFlags: 0

@@ -72,96 +72,94 @@ public class Character : MonoBehaviour
 	/// The current character state.
 	/// </summary>
 	private CharacterStates characterState = CharacterStates.Idle;
-
+	#endregion
+	#region Public
 	[Header("Basic Info")]
 	/// <summary>
 	/// The Character's animator.
 	/// </summary>
 	[Tooltip("The Character's animator.")]
-	[SerializeField] private Animator animator = null;
-
+	public Animator animator = null;
 	/// <summary>
 	/// The Character's body.
 	/// </summary>
 	[Tooltip("The Character's body.")]
-	[SerializeField] private SkinnedMeshRenderer body = null;
+	public SkinnedMeshRenderer body = null;
 
 	[Header("Head Parts")]
 	/// <summary>
 	/// The Character's hairstyle.
 	/// </summary>
 	[Tooltip("The Character's hairstyle.")]
-	[SerializeField] private SkinnedMeshRenderer hairstyle = null;
+	public SkinnedMeshRenderer hairstyle = null;
 
 	/// <summary>
 	/// The Character's eyes.
 	/// </summary>
 	[Tooltip("The Character's eyes.")]
-	[SerializeField] private SkinnedMeshRenderer eyes = null;
+	public SkinnedMeshRenderer eyes = null;
 
 	/// <summary>
 	/// The Character's nose.
 	/// </summary>
 	[Tooltip("The Character's nose.")]
-	[SerializeField] private SkinnedMeshRenderer nose = null;
+	public SkinnedMeshRenderer nose = null;
 
 	/// <summary>
 	/// The Character's hat.
 	/// </summary>
 	[Tooltip("The Character's hat.")]
-	[SerializeField] private SkinnedMeshRenderer hat = null;
+	public SkinnedMeshRenderer hat = null;
 
 	/// <summary>
 	/// The Character's facial hair.
 	/// </summary>
 	[Tooltip("The Character's facial hair.")]
-	[SerializeField] private SkinnedMeshRenderer facialHair = null;
+	public SkinnedMeshRenderer facialHair = null;
 
 	/// <summary>
 	/// The Character's face accessory.
 	/// </summary>
 	[Tooltip("The Character's face accessory.")]
-	[SerializeField] private SkinnedMeshRenderer faceAccessory = null;
+	public SkinnedMeshRenderer faceAccessory = null;
 
 	[Header("Torso Parts")]
 	/// <summary>
 	/// The Character's shirt.
 	/// </summary>
 	[Tooltip("The Character's shirt.")]
-	[SerializeField] private GameObject shirtParent = null;
+	public GameObject shirtParent = null;
 
 	/// <summary>
 	/// The Character's back accessory.
 	/// </summary>
 	[Tooltip("The Character's back accessory.")]
-	[SerializeField] private GameObject backAccessoryParent = null;
+	public GameObject backAccessoryParent = null;
 
 	/// <summary>
 	/// The Character's gloves.
 	/// </summary>
 	[Tooltip("The Character's gloves.")]
-	[SerializeField] private GameObject glovesParent = null;
+	public GameObject glovesParent = null;
 
 	[Header("Bottom Parts")]
 	/// <summary>
 	/// The Character's pants.
 	/// </summary>
 	[Tooltip("The Character's pants.")]
-	[SerializeField] private GameObject pantsParent = null;
+	public GameObject pantsParent = null;
 
 	/// <summary>
 	/// The Character's waist accessory.
 	/// </summary>
 	[Tooltip("The Character's waist accessory.")]
-	[SerializeField] private GameObject waistAccessoryParent = null;
+	public GameObject waistAccessoryParent = null;
 
 	/// <summary>
 	/// The Character's shoes.
 	/// </summary>
 	[Tooltip("The Character's shoes.")]
-	[SerializeField] private GameObject shoesParent = null;
-	#endregion
-	#region Public
+	public GameObject shoesParent = null;
 	/// <summary>
 	/// The character part index.
 	/// </summary>
