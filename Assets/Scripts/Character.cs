@@ -203,7 +203,7 @@ public class Character : MonoBehaviour
 			case CharacterStates.Idle:
 				if (remainingIdleTime <= 0.0f)
 				{
-					positionHeadedTo = new Vector3(Random.Range(-wanderLimit.x, wanderLimit.x), 0.0f, Random.Range(-wanderLimit.y, wanderLimit.y));
+					positionHeadedTo = new Vector3(Random.Range(-wanderLimit.x, wanderLimit.x), 0.0f, Random.Range(-wanderLimit.y + 2.5f, wanderLimit.y + 2.5f));
 					positionToLookAt = Quaternion.LookRotation(positionHeadedTo - new Vector3(transform.position.x, 0.0f, transform.position.z));
 					characterState = CharacterStates.Turning;
 				}
