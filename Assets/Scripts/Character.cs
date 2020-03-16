@@ -226,6 +226,12 @@ public class Character : MonoBehaviour
 	/// </summary>
 	[HideInInspector]
 	public bool isPickedUp = false;
+
+	/// <summary>
+	/// If the character is to be deleted.
+	/// </summary>
+	[HideInInspector]
+	public bool isToBeDeleted = false;
 	#endregion
 	#endregion
 
@@ -532,8 +538,6 @@ public class Character : MonoBehaviour
 					animationOnPickup = "Running";
 				}
 
-				Debug.Log(animationOnPickup);
-
 				pickedUpCharacterState = characterState;
 				characterState = CharacterStates.PickedUp;
 				isPickedUp = true;
@@ -548,11 +552,23 @@ public class Character : MonoBehaviour
 		{
 			if (SceneManager.GetActiveScene().name == "Plaza")
 			{
-				characterState = pickedUpCharacterState;
-				isPickedUp = true;
-				transform.position = pickedUpPoint;
-				transform.rotation = rotationOnPickUp;
-				animator.Play(animationOnPickup);
+				if (CharacterManager.isOverDelete)
+				{
+					isToBeDeleted = true;
+				}
+				else if (CharacterManager.isOverEdit)
+				{
+					PlayerPrefs.SetInt("SelectedCharacter", characterInfo.id);
+					SceneManager.LoadScene("CharacterCreation", LoadSceneMode.Single);
+				}
+				else
+				{
+					characterState = pickedUpCharacterState;
+					isPickedUp = false;
+					transform.position = pickedUpPoint;
+					transform.rotation = rotationOnPickUp;
+					animator.Play(animationOnPickup);
+				}
 			}
 		});
 	}

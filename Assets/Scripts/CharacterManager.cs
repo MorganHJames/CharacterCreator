@@ -44,9 +44,40 @@ public class CharacterManager : MonoBehaviour
 	/// Array of positions the characters can run to.
 	/// </summary>
 	private Vector3[] whistlePositions = new Vector3[25];
+
+	/// <summary>
+	/// The pick up button animator.
+	/// </summary>
+	[Tooltip("The pick up button animator.")]
+	[SerializeField] private Animator pickUpButtonAnimator = null;
+
+	/// <summary>
+	/// True when the pick up buttons are on show.
+	/// </summary>
+	private bool isShowingPickUpButtons = false;
+
+	/// <summary>
+	/// The script attached to the delete character button to tell when the mouse is over it.
+	/// </summary>
+	[Tooltip("The script attached to the delete character button to tell when the mouse is over it.")]
+	[SerializeField] private MouseOverElement deleteCharacterButton = null;
+
+	/// <summary>
+	/// The script attached to the edit character button to tell when the mouse is over it.
+	/// </summary>
+	[Tooltip("The script attached to the edit character button to tell when the mouse is over it.")]
+	[SerializeField] private MouseOverElement editCharacterButton = null;
 	#endregion
 	#region Public
+	/// <summary>
+	/// True when the pointer is over the delete character button.
+	/// </summary>
+	static public bool isOverDelete = false;
 
+	/// <summary>
+	/// True when the pointer is over the edit character button.
+	/// </summary>
+	static public bool isOverEdit = false;
 	#endregion
 	#endregion
 
@@ -59,6 +90,11 @@ public class CharacterManager : MonoBehaviour
 	{
 		PlayerPrefs.SetInt("SelectedCharacter", -1);
 		SpawnAllCharacters();
+
+		deleteCharacterButton.mouseOverEvent.AddListener(() => { isOverDelete = true; });
+		deleteCharacterButton.mouseExitEvent.AddListener(() => { isOverDelete = false; });
+		editCharacterButton.mouseOverEvent.AddListener(() => { isOverEdit = true; });
+		editCharacterButton.mouseExitEvent.AddListener(() => { isOverEdit = false; });
 	}
 
 	/// <summary>
@@ -67,6 +103,60 @@ public class CharacterManager : MonoBehaviour
 	private void Update()
 	{
 		FixCharacterPlaneScale();
+
+		if (isShowingPickUpButtons)
+		{
+			bool cancel = true;
+
+			foreach (Character character in characterList)
+			{
+				if (character.isPickedUp)
+				{
+					cancel = false;
+				}
+			}
+
+			if (cancel)
+			{
+				isShowingPickUpButtons = false;
+				pickUpButtonAnimator.Play("Drop");
+			}
+		}
+		else
+		{
+			bool start = false;
+
+			foreach (Character character in characterList)
+			{
+				if (character.isPickedUp)
+				{
+					start = true;
+				}
+			}
+
+			if (start)
+			{
+				isShowingPickUpButtons = true;
+				pickUpButtonAnimator.Play("PickUp");
+			}
+		}
+
+		List<Character> charactersToBeDeleted = new List<Character>();
+
+		foreach (Character character in characterList)
+		{
+			if (character.isToBeDeleted)
+			{
+				charactersToBeDeleted.Add(character);
+			}
+		}
+
+		foreach (Character character in charactersToBeDeleted)
+		{
+			characterList.Remove(character);
+			character.characterInfo.Delete();
+			Destroy(character.gameObject);
+		}
 	}
 
 	/// <summary>
@@ -161,6 +251,7 @@ public class CharacterManager : MonoBehaviour
 		for (int i = 0; i < characterList.Count; i++)
 		{
 			characterList[i].Alert(whistlePositions[i]);
+			Debug.Log(whistlePositions[i]);
 		}
 	}
 

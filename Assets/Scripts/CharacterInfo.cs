@@ -235,6 +235,15 @@ public class CharacterInfo : ScriptableObject
 	}
 
 	/// <summary>
+	/// Deletes the character.
+	/// </summary>
+	public void Delete()
+	{
+		string jsonSavePath = Application.persistentDataPath + "/Characters/" + id;
+		File.Delete(jsonSavePath);
+	}
+
+	/// <summary>
 	/// Copies all of the info from an instance to this instance.
 	/// </summary>
 	/// <param name="instanceToCopyFrom">The character info instance to copy from.</param>
