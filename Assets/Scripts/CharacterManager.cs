@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Controls every character in the scene and spawns them in on start.
@@ -38,6 +39,11 @@ public class CharacterManager : MonoBehaviour
 	/// </summary>
 	[Tooltip("The plane that contains the area the characters can move.")]
 	[SerializeField] private GameObject screenPlane = null;
+
+	/// <summary>
+	/// Array of positions the characters can run to.
+	/// </summary>
+	private Vector3[] whistlePositions = new Vector3[25];
 	#endregion
 	#region Public
 
@@ -99,6 +105,22 @@ public class CharacterManager : MonoBehaviour
 
 		}
 
+		float planeSize = screenPlane.GetComponent<Renderer>().bounds.size.x;
+		float offSet = planeSize * 0.5f;
+		float cellSize = planeSize / 5.0f;
+		offSet -= cellSize * 0.5f;
+
+		int position = 0;
+
+		for (int i = 0; i < 5; i++)
+		{
+			for (int k = 0; k < 5; k++)
+			{
+				whistlePositions[position] = new Vector3((k * cellSize) - offSet, 0.0f, (i * cellSize) - offSet + 2.5f);
+				position++;
+			}
+		}
+
 		foreach (string file in System.IO.Directory.GetFiles(Application.persistentDataPath + "/Characters/"))
 		{
 			int pos = file.LastIndexOf("/") + 1;
@@ -123,7 +145,47 @@ public class CharacterManager : MonoBehaviour
 	}
 	#endregion
 	#region Public
+	/// <summary>
+	/// Goes to the create new character screen.
+	/// </summary>
+	public void CreateNewCharacter()
+	{
+		SceneManager.LoadScene("CharacterCreation", LoadSceneMode.Single);
+	}
 
+	/// <summary>
+	/// Makes all the characters line up.
+	/// </summary>
+	public void Whistle()
+	{
+		for (int i = 0; i < characterList.Count; i++)
+		{
+			characterList[i].Alert(whistlePositions[i]);
+		}
+	}
+
+	/// <summary>
+	/// Stops all the characters line up.
+	/// </summary>
+	public void StopWhistle()
+	{
+		for (int i = 0; i < characterList.Count; i++)
+		{
+			characterList[i].StopAlert();
+		}
+	}
+
+	/// <summary>
+	/// Closes the app.
+	/// </summary>
+	public void Exit()
+	{
+		#if UNITY_EDITOR
+		UnityEditor.EditorApplication.isPlaying = false;
+		#else
+        Application.Quit();
+		#endif
+	}
 	#endregion
 	#endregion
 }

@@ -5,7 +5,9 @@
 // Brief: Holds and applies the character info to the character also handles the saving of the character.
 //////////////////////////////////////////////////////////// 
 
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Holds and applies the character info to the character also handles the saving of the character.
@@ -15,9 +17,47 @@ public class Character : MonoBehaviour
 	#region Variables
 	#region Private
 	/// <summary>
+	/// The TMP that holds the characters name.
+	/// </summary>
+	[Tooltip("The TMP that holds the characters name.")]
+	[SerializeField] private TextMeshProUGUI nameText = null;
+
+	/// <summary>
+	/// The animator that controls the characters name.
+	/// </summary>
+	[Tooltip("The animator that controls the characters name.")]
+	[SerializeField] private Animator nameTextAnimator = null;
+
+	/// <summary>
+	/// The character's user interaction script.
+	/// </summary>
+	[Tooltip("The character's user interaction script.")]
+	[SerializeField] private CharacterUserInteraction characterUserInteraction = null;
+
+	/// <summary>
 	/// The position that the character is currently heading towards.
 	/// </summary>
 	private Vector3 positionHeadedTo = new Vector3(0.0f, 0.0f, 0.0f);
+
+	/// <summary>
+	/// Where the character was picked up from.
+	/// </summary>
+	private Vector3 pickedUpPoint = Vector3.zero;
+
+	/// <summary>
+	/// The characters picked up state.
+	/// </summary>
+	private CharacterStates pickedUpCharacterState = CharacterStates.Idle;
+
+	/// <summary>
+	/// The character's rotation on pick up.
+	/// </summary>
+	private Quaternion rotationOnPickUp = Quaternion.identity;
+
+	/// <summary>
+	/// The animation name played on pickup.
+	/// </summary>
+	private string animationOnPickup = "";
 
 	/// <summary>
 	/// Where the character should be looking.
@@ -65,7 +105,9 @@ public class Character : MonoBehaviour
 		Turning,
 		AlertTurning,
 		Alert,
-		FaceUser
+		FaceUser,
+		PickedUp,
+		IsPickedUp
 	}
 
 	/// <summary>
@@ -80,6 +122,7 @@ public class Character : MonoBehaviour
 	/// </summary>
 	[Tooltip("The Character's animator.")]
 	public Animator animator = null;
+
 	/// <summary>
 	/// The Character's body.
 	/// </summary>
@@ -177,6 +220,12 @@ public class Character : MonoBehaviour
 	/// </summary>
 	[HideInInspector]
 	public static Vector2 wanderLimit = new Vector2(5.0f, 5.0f);
+
+	/// <summary>
+	/// If the character is picked up or not.
+	/// </summary>
+	[HideInInspector]
+	public bool isPickedUp = false;
 	#endregion
 	#endregion
 
@@ -224,7 +273,7 @@ public class Character : MonoBehaviour
 				if (Vector3.Distance(new Vector3(transform.position.x, 0.0f, transform.position.z), positionHeadedTo) < 0.1f)
 				{
 					animator.Play("Alert");
-					positionToLookAt = Quaternion.LookRotation(Vector3.back - new Vector3(transform.position.x, 0.0f, transform.position.z));
+					positionToLookAt = Quaternion.LookRotation(Vector3.back);
 					characterState = CharacterStates.FaceUser;
 				}
 				else
@@ -265,6 +314,13 @@ public class Character : MonoBehaviour
 				{
 					transform.rotation = Quaternion.Slerp(transform.rotation, positionToLookAt, alertTurnSpeed * Time.deltaTime);
 				}
+				break;
+			case CharacterStates.PickedUp:
+				animator.Play("Falling");
+				characterState = CharacterStates.IsPickedUp;
+				break;
+			case CharacterStates.IsPickedUp:
+				transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y - 250.0f, Camera.main.nearClipPlane + 5f));
 				break;
 			default:
 				break;
@@ -436,6 +492,69 @@ public class Character : MonoBehaviour
 			GameObject shoes = Instantiate(characterPartIndex.shoes[characterInfo.shoesIndex], shoesParent.transform);
 			shoes.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.shoesColor;
 		}
+
+		nameText.text = characterInfo.name;
+
+		characterUserInteraction.mouseEnterEvent.AddListener(() =>
+		{
+			if (SceneManager.GetActiveScene().name == "Plaza")
+			{
+				nameTextAnimator.Play("CharacterNameUp");
+			}
+		});
+
+		characterUserInteraction.mouseExitEvent.AddListener(() =>
+		{
+			if (SceneManager.GetActiveScene().name == "Plaza")
+			{
+				nameTextAnimator.Play("CharacterNameDown");
+			}
+		});
+
+		characterUserInteraction.mouseDownEvent.AddListener(() =>
+		{
+			if (SceneManager.GetActiveScene().name == "Plaza")
+			{
+				if (animator.GetCurrentAnimatorStateInfo(0).IsName("Alert"))
+				{
+					animationOnPickup = "Alert";
+				}
+				else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+				{
+					animationOnPickup = "Idle";
+				}
+				else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+				{
+					animationOnPickup = "Walk";
+				}
+				else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Running"))
+				{
+					animationOnPickup = "Running";
+				}
+
+				Debug.Log(animationOnPickup);
+
+				pickedUpCharacterState = characterState;
+				characterState = CharacterStates.PickedUp;
+				isPickedUp = true;
+				pickedUpPoint = transform.position;
+				rotationOnPickUp = transform.rotation;
+
+				transform.rotation = Quaternion.LookRotation(Vector3.back);
+			}
+		});
+
+		characterUserInteraction.mouseUpEvent.AddListener(() =>
+		{
+			if (SceneManager.GetActiveScene().name == "Plaza")
+			{
+				characterState = pickedUpCharacterState;
+				isPickedUp = true;
+				transform.position = pickedUpPoint;
+				transform.rotation = rotationOnPickUp;
+				animator.Play(animationOnPickup);
+			}
+		});
 	}
 	#endregion
 	#endregion
