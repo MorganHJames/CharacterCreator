@@ -52,6 +52,12 @@ public class CharacterManager : MonoBehaviour
 	[SerializeField] private Animator pickUpButtonAnimator = null;
 
 	/// <summary>
+	/// The too many characters animator.
+	/// </summary>
+	[Tooltip("The too many characters animator.")]
+	[SerializeField] private Animator tooManyCharactersAnimator = null;
+
+	/// <summary>
 	/// True when the pick up buttons are on show.
 	/// </summary>
 	private bool isShowingPickUpButtons = false;
@@ -240,7 +246,14 @@ public class CharacterManager : MonoBehaviour
 	/// </summary>
 	public void CreateNewCharacter()
 	{
-		SceneManager.LoadScene("CharacterCreation", LoadSceneMode.Single);
+		if (characterList.Count + 1 == 26)
+		{
+			tooManyCharactersAnimator.Play("TooManyCharacters");
+		}
+		else
+		{
+			SceneManager.LoadScene("CharacterCreation", LoadSceneMode.Single);
+		}
 	}
 
 	/// <summary>
@@ -251,7 +264,6 @@ public class CharacterManager : MonoBehaviour
 		for (int i = 0; i < characterList.Count; i++)
 		{
 			characterList[i].Alert(whistlePositions[i]);
-			Debug.Log(whistlePositions[i]);
 		}
 	}
 

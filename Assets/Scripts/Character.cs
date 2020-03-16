@@ -264,7 +264,7 @@ public class Character : MonoBehaviour
 				}
 				break;
 			case CharacterStates.Walking:
-				if (Vector3.Distance(new Vector3(transform.position.x, 0.0f, transform.position.z), positionHeadedTo) < 0.1f)
+				if (Vector3.Distance(new Vector3(transform.position.x, 0.0f, transform.position.z), positionHeadedTo) < 0.25f)
 				{
 					remainingIdleTime = Random.Range(0.0f, maxIdleTime);
 					animator.Play("Idle");
@@ -276,7 +276,7 @@ public class Character : MonoBehaviour
 				}
 				break;
 			case CharacterStates.Running:
-				if (Vector3.Distance(new Vector3(transform.position.x, 0.0f, transform.position.z), positionHeadedTo) < 0.1f)
+				if (Vector3.Distance(new Vector3(transform.position.x, 0.0f, transform.position.z), positionHeadedTo) < 0.25f)
 				{
 					animator.Play("Alert");
 					positionToLookAt = Quaternion.LookRotation(Vector3.back);
