@@ -35,6 +35,12 @@ public class Character : MonoBehaviour
 	[SerializeField] private CharacterUserInteraction characterUserInteraction = null;
 
 	/// <summary>
+	/// The character's audio source.
+	/// </summary>
+	[Tooltip("The character's audio source.")]
+	[SerializeField] private AudioSource audioSource = null;
+
+	/// <summary>
 	/// The position that the character is currently heading towards.
 	/// </summary>
 	private Vector3 positionHeadedTo = new Vector3(0.0f, 0.0f, 0.0f);
@@ -545,6 +551,7 @@ public class Character : MonoBehaviour
 				rotationOnPickUp = transform.rotation;
 
 				transform.rotation = Quaternion.LookRotation(Vector3.back);
+				PlayPickUpNoise();
 			}
 		});
 
@@ -571,6 +578,15 @@ public class Character : MonoBehaviour
 				}
 			}
 		});
+	}
+
+	/// <summary>
+	/// Plays the noise of the character.
+	/// </summary>
+	public void PlayPickUpNoise()
+	{
+		audioSource.pitch = characterInfo.pitchOfVoice;
+		audioSource.Play();
 	}
 	#endregion
 	#endregion

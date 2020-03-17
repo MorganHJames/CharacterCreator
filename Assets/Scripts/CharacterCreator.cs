@@ -321,6 +321,7 @@ public class CharacterCreator : MonoBehaviour
 
 		voicePitchSlider.value = Random.Range(voicePitchSlider.minValue, voicePitchSlider.maxValue);
 		SetVoicePitch();
+		currentCharacter.PlayPickUpNoise();
 
 		currentCharacter.characterInfo.animationControllerIndex = Random.Range(0, currentCharacter.characterPartIndex.animatorControllers.Length);
 
