@@ -249,10 +249,12 @@ public class CharacterManager : MonoBehaviour
 		if (characterList.Count + 1 == 26)
 		{
 			tooManyCharactersAnimator.Play("TooManyCharacters");
+			AudioManager.instance.PlayOneShot((int)AudioManager.SFXClips.Error);
 		}
 		else
 		{
 			SceneManager.LoadScene("CharacterCreation", LoadSceneMode.Single);
+			AudioManager.instance.PlayOneShot((int)AudioManager.SFXClips.Button);
 		}
 	}
 
@@ -265,6 +267,7 @@ public class CharacterManager : MonoBehaviour
 		{
 			characterList[i].Alert(whistlePositions[i]);
 		}
+		AudioManager.instance.PlayOneShot((int)AudioManager.SFXClips.Button);
 	}
 
 	/// <summary>
@@ -276,6 +279,7 @@ public class CharacterManager : MonoBehaviour
 		{
 			characterList[i].StopAlert();
 		}
+		AudioManager.instance.PlayOneShot((int)AudioManager.SFXClips.Button);
 	}
 
 	/// <summary>
@@ -283,6 +287,7 @@ public class CharacterManager : MonoBehaviour
 	/// </summary>
 	public void Exit()
 	{
+		AudioManager.instance.PlayOneShot((int)AudioManager.SFXClips.Button);
 		#if UNITY_EDITOR
 		UnityEditor.EditorApplication.isPlaying = false;
 		#else

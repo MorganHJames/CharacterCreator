@@ -562,11 +562,13 @@ public class Character : MonoBehaviour
 				if (CharacterManager.isOverDelete)
 				{
 					isToBeDeleted = true;
+					AudioManager.instance.PlayOneShot((int)AudioManager.SFXClips.Delete);
 				}
 				else if (CharacterManager.isOverEdit)
 				{
 					PlayerPrefs.SetInt("SelectedCharacter", characterInfo.id);
 					SceneManager.LoadScene("CharacterCreation", LoadSceneMode.Single);
+					AudioManager.instance.PlayOneShot((int)AudioManager.SFXClips.Button);
 				}
 				else
 				{
@@ -575,6 +577,7 @@ public class Character : MonoBehaviour
 					transform.position = pickedUpPoint;
 					transform.rotation = rotationOnPickUp;
 					animator.Play(animationOnPickup);
+					AudioManager.instance.PlayOneShot((int)AudioManager.SFXClips.Drop);
 				}
 			}
 		});

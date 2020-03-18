@@ -61,29 +61,10 @@ public class AudioManager : MonoBehaviour
 	#region Public
 	public enum SFXClips
 	{
-		TakeDamage = 0,
-		Button,
-		EnemyTakeDamage,
-		ScoreIncrease,
-		Move,
-		GameOver,
-		EnemyMove,
-		EnemyMelee,
-		Melee,
-		Boomerang,
-		BombDrop,
-		BombExplode,
-		TileSpawn,
-		Heal,
-		CardActivated,
-		DrawCard,
-		Discard,
-		Die,
-		Lava,
-		EnemyDie,
-		EnemyPush,
-		Push,
-		Win
+		Button = 0,
+		Delete,
+		Drop,
+		Error
 	}
 	#endregion
 	#endregion

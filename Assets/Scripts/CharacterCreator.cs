@@ -309,6 +309,7 @@ public class CharacterCreator : MonoBehaviour
 	/// </summary>
 	public void Randomise()
 	{
+		AudioManager.instance.PlayOneShot((int)AudioManager.SFXClips.Button);
 		// Basic Info.
 		currentCharacter.characterInfo.name = RandomName();
 		nameInputField.text = currentCharacter.characterInfo.name;
@@ -970,6 +971,14 @@ public class CharacterCreator : MonoBehaviour
 			GameObject shoes = Instantiate(currentCharacter.characterPartIndex.shoes[currentCharacter.characterInfo.shoesIndex], currentCharacter.shoesParent.transform);
 			shoes.GetComponentInChildren<SkinnedMeshRenderer>().material.color = currentCharacter.characterInfo.shoesColor;
 		}
+	}
+
+	/// <summary>
+	/// Plays the button sound.
+	/// </summary>
+	public void PlayButtonNoise()
+	{
+		AudioManager.instance.PlayOneShot((int)AudioManager.SFXClips.Button);
 	}
 	#endregion
 	#endregion
