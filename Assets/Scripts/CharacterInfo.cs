@@ -228,8 +228,13 @@ public class CharacterInfo : ScriptableObject
 			id += PlayerPrefs.GetInt("CharacterCount");
 			PlayerPrefs.SetInt("CharacterCount", id + 1);
 		}
-		string jsonSavePath = Application.persistentDataPath + "/Characters/" + id;
 
+		if (!Directory.Exists(Application.persistentDataPath + "/Characters"))
+		{
+			Directory.CreateDirectory(Application.persistentDataPath + "/Characters");
+		}
+
+		string jsonSavePath = Application.persistentDataPath + "/Characters/" + id;
 		string jsonData = JsonUtility.ToJson(this);
 		File.WriteAllText(jsonSavePath, jsonData);
 	}
