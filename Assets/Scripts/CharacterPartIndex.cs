@@ -28,40 +28,40 @@ public class CharacterPartIndex : ScriptableObject
 	public AnimatorController[] animatorControllers;
 
 	/// <summary>
-	/// All of the hairstyle meshes.
+	/// All of the hairstyle prefabs.
 	/// </summary>
-	[Tooltip("All of the hairstyle meshes.")]
-	public Mesh[] hairstyles;
+	[Tooltip("All of the hairstyle prefabs.")]
+	public GameObject[] hairstyles;
 
 	/// <summary>
-	/// All of the eyes meshes.
+	/// All of the eyes prefabs.
 	/// </summary>
-	[Tooltip("All of the eyes meshes.")]
-	public Mesh[] eyes;
+	[Tooltip("All of the eyes prefabs.")]
+	public GameObject[] eyes;
 
 	/// <summary>
-	/// All of the nose meshes.
+	/// All of the nose prefabs.
 	/// </summary>
-	[Tooltip("All of the nose meshes.")]
-	public Mesh[] noses;
+	[Tooltip("All of the nose prefabs.")]
+	public GameObject[] noses;
 
 	/// <summary>
-	/// All of the hat meshes.
+	/// All of the hat prefabs.
 	/// </summary>
-	[Tooltip("All of the hat meshes.")]
-	public Mesh[] hats;
+	[Tooltip("All of the hat prefabs.")]
+	public GameObject[] hats;
 
 	/// <summary>
-	/// All of the facial hair meshes.
+	/// All of the facial hair prefabs.
 	/// </summary>
-	[Tooltip("All of the facial hair meshes.")]
-	public Mesh[] facialHairs;
+	[Tooltip("All of the facial hair prefabs.")]
+	public GameObject[] facialHairs;
 
 	/// <summary>
-	/// All of the face accessory meshes.
+	/// All of the face accessory prefabs.
 	/// </summary>
-	[Tooltip("All of the face accessory meshes.")]
-	public Mesh[] faceAccessorys;
+	[Tooltip("All of the face accessory prefabs.")]
+	public GameObject[] faceAccessorys;
 
 	[Header("Torso Parts")]
 	/// <summary>

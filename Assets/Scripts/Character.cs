@@ -140,37 +140,37 @@ public class Character : MonoBehaviour
 	/// The Character's hairstyle.
 	/// </summary>
 	[Tooltip("The Character's hairstyle.")]
-	public SkinnedMeshRenderer hairstyle = null;
+	public GameObject hairstyleParent = null;
 
 	/// <summary>
 	/// The Character's eyes.
 	/// </summary>
 	[Tooltip("The Character's eyes.")]
-	public SkinnedMeshRenderer eyes = null;
+	public GameObject eyesParent = null;
 
 	/// <summary>
 	/// The Character's nose.
 	/// </summary>
 	[Tooltip("The Character's nose.")]
-	public SkinnedMeshRenderer nose = null;
+	public GameObject noseParent = null;
 
 	/// <summary>
 	/// The Character's hat.
 	/// </summary>
 	[Tooltip("The Character's hat.")]
-	public SkinnedMeshRenderer hat = null;
+	public GameObject hatParent = null;
 
 	/// <summary>
 	/// The Character's facial hair.
 	/// </summary>
 	[Tooltip("The Character's facial hair.")]
-	public SkinnedMeshRenderer facialHair = null;
+	public GameObject facialHairParent = null;
 
 	/// <summary>
 	/// The Character's face accessory.
 	/// </summary>
 	[Tooltip("The Character's face accessory.")]
-	public SkinnedMeshRenderer faceAccessory = null;
+	public GameObject faceAccessoryParent = null;
 
 	[Header("Torso Parts")]
 	/// <summary>
@@ -393,38 +393,80 @@ public class Character : MonoBehaviour
 
 		if (characterPartIndex.hairstyles.Length > 0)
 		{
-			hairstyle.sharedMesh = characterPartIndex.hairstyles[characterInfo.hairstyleIndex];
-			hairstyle.material.color = characterInfo.hairstyleColor;
+			if (hairstyleParent.transform.childCount > 0)
+			{
+				foreach (Transform child in hairstyleParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject hairstyle = Instantiate(characterPartIndex.hairstyles[characterInfo.hairstyleIndex], hairstyleParent.transform);
+			hairstyle.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.hairstyleColor;
 		}
 
 		if (characterPartIndex.eyes.Length > 0)
 		{
-			eyes.sharedMesh = characterPartIndex.eyes[characterInfo.eyesIndex];
-			eyes.material.color = characterInfo.eyeColor;
+			if (eyesParent.transform.childCount > 0)
+			{
+				foreach (Transform child in eyesParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject eye = Instantiate(characterPartIndex.eyes[characterInfo.eyesIndex], eyesParent.transform);
+			eye.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.eyeColor;
 		}
 
 		if (characterPartIndex.noses.Length > 0)
 		{
-			nose.sharedMesh = characterPartIndex.noses[characterInfo.noseIndex];
-			nose.material.color = characterInfo.noseColor;
+			if (noseParent.transform.childCount > 0)
+			{
+				foreach (Transform child in noseParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject nose = Instantiate(characterPartIndex.noses[characterInfo.noseIndex], noseParent.transform);
+			nose.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.noseColor;
 		}
 
 		if (characterPartIndex.hats.Length > 0)
 		{
-			hat.sharedMesh = characterPartIndex.hats[characterInfo.hatIndex];
-			hat.material.color = characterInfo.hatColor;
+			if (hatParent.transform.childCount > 0)
+			{
+				foreach (Transform child in hatParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject hat = Instantiate(characterPartIndex.hats[characterInfo.hatIndex], hatParent.transform);
+			hat.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.hatColor;
 		}
 
 		if (characterPartIndex.facialHairs.Length > 0)
 		{
-			facialHair.sharedMesh = characterPartIndex.facialHairs[characterInfo.facialHairIndex];
-			facialHair.material.color = characterInfo.facialHairColor;
+			if (facialHairParent.transform.childCount > 0)
+			{
+				foreach (Transform child in facialHairParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject facialHair = Instantiate(characterPartIndex.facialHairs[characterInfo.facialHairIndex], facialHairParent.transform);
+			facialHair.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.facialHairColor;
 		}
 
 		if (characterPartIndex.faceAccessorys.Length > 0)
 		{
-			faceAccessory.sharedMesh = characterPartIndex.faceAccessorys[characterInfo.faceAccessoryIndex];
-			faceAccessory.material.color = characterInfo.faceAccessoryColor;
+			if (faceAccessoryParent.transform.childCount > 0)
+			{
+				foreach (Transform child in faceAccessoryParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject faceAccessory = Instantiate(characterPartIndex.faceAccessorys[characterInfo.faceAccessoryIndex], faceAccessoryParent.transform);
+			faceAccessory.GetComponentInChildren<SkinnedMeshRenderer>().material.color = characterInfo.faceAccessoryColor;
 		}
 
 		if (characterPartIndex.shirts.Length > 0)

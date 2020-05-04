@@ -466,7 +466,12 @@ public class CharacterCreator : MonoBehaviour
 	public void SetHairColor()
 	{
 		currentCharacter.characterInfo.hairstyleColor = hairColorPicker.CurrentColor;
-		currentCharacter.hairstyle.material.color = currentCharacter.characterInfo.hairstyleColor;
+
+		SkinnedMeshRenderer skinnedMeshRenderer = currentCharacter.hairstyleParent.GetComponentInChildren<SkinnedMeshRenderer>();
+		if (skinnedMeshRenderer)
+		{
+			skinnedMeshRenderer.material.color = currentCharacter.characterInfo.hairstyleColor;
+		}
 	}
 
 	/// <summary>
@@ -475,7 +480,12 @@ public class CharacterCreator : MonoBehaviour
 	public void SetEyeColor()
 	{
 		currentCharacter.characterInfo.eyeColor = eyesColorPicker.CurrentColor;
-		currentCharacter.eyes.material.color = currentCharacter.characterInfo.eyeColor;
+
+		SkinnedMeshRenderer skinnedMeshRenderer = currentCharacter.eyesParent.GetComponentInChildren<SkinnedMeshRenderer>();
+		if (skinnedMeshRenderer)
+		{
+			skinnedMeshRenderer.material.color = currentCharacter.characterInfo.eyeColor;
+		}
 	}
 
 	/// <summary>
@@ -484,7 +494,12 @@ public class CharacterCreator : MonoBehaviour
 	public void SetNoseColor()
 	{
 		currentCharacter.characterInfo.noseColor = noseColorPicker.CurrentColor;
-		currentCharacter.nose.material.color = currentCharacter.characterInfo.noseColor;
+
+		SkinnedMeshRenderer skinnedMeshRenderer = currentCharacter.noseParent.GetComponentInChildren<SkinnedMeshRenderer>();
+		if (skinnedMeshRenderer)
+		{
+			skinnedMeshRenderer.material.color = currentCharacter.characterInfo.noseColor;
+		}
 	}
 
 	/// <summary>
@@ -493,7 +508,12 @@ public class CharacterCreator : MonoBehaviour
 	public void SetHatColor()
 	{
 		currentCharacter.characterInfo.hatColor = hatColorPicker.CurrentColor;
-		currentCharacter.hat.material.color = currentCharacter.characterInfo.hatColor;
+
+		SkinnedMeshRenderer skinnedMeshRenderer = currentCharacter.hatParent.GetComponentInChildren<SkinnedMeshRenderer>();
+		if (skinnedMeshRenderer)
+		{
+			skinnedMeshRenderer.material.color = currentCharacter.characterInfo.hatColor;
+		}
 	}
 
 	/// <summary>
@@ -502,7 +522,12 @@ public class CharacterCreator : MonoBehaviour
 	public void SetFacialHairColor()
 	{
 		currentCharacter.characterInfo.facialHairColor = facialHairColorPicker.CurrentColor;
-		currentCharacter.facialHair.material.color = currentCharacter.characterInfo.facialHairColor;
+
+		SkinnedMeshRenderer skinnedMeshRenderer = currentCharacter.facialHairParent.GetComponentInChildren<SkinnedMeshRenderer>();
+		if (skinnedMeshRenderer)
+		{
+			skinnedMeshRenderer.material.color = currentCharacter.characterInfo.facialHairColor;
+		}
 	}
 
 	/// <summary>
@@ -511,7 +536,12 @@ public class CharacterCreator : MonoBehaviour
 	public void SetFaceAccessoryColor()
 	{
 		currentCharacter.characterInfo.faceAccessoryColor = faceAccessoryColorPicker.CurrentColor;
-		currentCharacter.faceAccessory.material.color = currentCharacter.characterInfo.faceAccessoryColor;
+
+		SkinnedMeshRenderer skinnedMeshRenderer = currentCharacter.faceAccessoryParent.GetComponentInChildren<SkinnedMeshRenderer>();
+		if (skinnedMeshRenderer)
+		{
+			skinnedMeshRenderer.material.color = currentCharacter.characterInfo.faceAccessoryColor;
+		}
 	}
 
 	/// <summary>
@@ -640,8 +670,15 @@ public class CharacterCreator : MonoBehaviour
 
 		if (currentCharacter.characterPartIndex.hairstyles.Length > 0)
 		{
-			currentCharacter.hairstyle.sharedMesh = currentCharacter.characterPartIndex.hairstyles[currentCharacter.characterInfo.hairstyleIndex];
-			currentCharacter.hairstyle.material.color = currentCharacter.characterInfo.hairstyleColor;
+			if (currentCharacter.hairstyleParent.transform.childCount > 0)
+			{
+				foreach (Transform child in currentCharacter.hairstyleParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject hairStyle = Instantiate(currentCharacter.characterPartIndex.hairstyles[currentCharacter.characterInfo.hairstyleIndex], currentCharacter.hairstyleParent.transform);
+			hairStyle.GetComponentInChildren<SkinnedMeshRenderer>().material.color = currentCharacter.characterInfo.hairstyleColor;
 		}
 	}
 
@@ -666,8 +703,15 @@ public class CharacterCreator : MonoBehaviour
 
 		if (currentCharacter.characterPartIndex.hairstyles.Length > 0)
 		{
-			currentCharacter.eyes.sharedMesh = currentCharacter.characterPartIndex.eyes[currentCharacter.characterInfo.eyesIndex];
-			currentCharacter.eyes.material.color = currentCharacter.characterInfo.eyeColor;
+			if (currentCharacter.eyesParent.transform.childCount > 0)
+			{
+				foreach (Transform child in currentCharacter.eyesParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject eye = Instantiate(currentCharacter.characterPartIndex.eyes[currentCharacter.characterInfo.eyesIndex], currentCharacter.eyesParent.transform);
+			eye.GetComponentInChildren<SkinnedMeshRenderer>().material.color = currentCharacter.characterInfo.eyeColor;
 		}
 	}
 
@@ -692,8 +736,15 @@ public class CharacterCreator : MonoBehaviour
 
 		if (currentCharacter.characterPartIndex.noses.Length > 0)
 		{
-			currentCharacter.nose.sharedMesh = currentCharacter.characterPartIndex.noses[currentCharacter.characterInfo.noseIndex];
-			currentCharacter.nose.material.color = currentCharacter.characterInfo.noseColor;
+			if (currentCharacter.noseParent.transform.childCount > 0)
+			{
+				foreach (Transform child in currentCharacter.noseParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject nose = Instantiate(currentCharacter.characterPartIndex.noses[currentCharacter.characterInfo.noseIndex], currentCharacter.noseParent.transform);
+			nose.GetComponentInChildren<SkinnedMeshRenderer>().material.color = currentCharacter.characterInfo.noseColor;
 		}
 	}
 
@@ -718,8 +769,15 @@ public class CharacterCreator : MonoBehaviour
 
 		if (currentCharacter.characterPartIndex.hats.Length > 0)
 		{
-			currentCharacter.hat.sharedMesh = currentCharacter.characterPartIndex.hats[currentCharacter.characterInfo.hatIndex];
-			currentCharacter.hat.material.color = currentCharacter.characterInfo.hatColor;
+			if (currentCharacter.hatParent.transform.childCount > 0)
+			{
+				foreach (Transform child in currentCharacter.hatParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject hat = Instantiate(currentCharacter.characterPartIndex.hats[currentCharacter.characterInfo.hatIndex], currentCharacter.hatParent.transform);
+			hat.GetComponentInChildren<SkinnedMeshRenderer>().material.color = currentCharacter.characterInfo.hatColor;
 		}
 	}
 
@@ -744,8 +802,15 @@ public class CharacterCreator : MonoBehaviour
 
 		if (currentCharacter.characterPartIndex.facialHairs.Length > 0)
 		{
-			currentCharacter.facialHair.sharedMesh = currentCharacter.characterPartIndex.facialHairs[currentCharacter.characterInfo.facialHairIndex];
-			currentCharacter.facialHair.material.color = currentCharacter.characterInfo.facialHairColor;
+			if (currentCharacter.facialHairParent.transform.childCount > 0)
+			{
+				foreach (Transform child in currentCharacter.facialHairParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject facialHair = Instantiate(currentCharacter.characterPartIndex.facialHairs[currentCharacter.characterInfo.facialHairIndex], currentCharacter.facialHairParent.transform);
+			facialHair.GetComponentInChildren<SkinnedMeshRenderer>().material.color = currentCharacter.characterInfo.facialHairColor;
 		}
 	}
 
@@ -770,8 +835,15 @@ public class CharacterCreator : MonoBehaviour
 
 		if (currentCharacter.characterPartIndex.faceAccessorys.Length > 0)
 		{
-			currentCharacter.faceAccessory.sharedMesh = currentCharacter.characterPartIndex.faceAccessorys[currentCharacter.characterInfo.faceAccessoryIndex];
-			currentCharacter.faceAccessory.material.color = currentCharacter.characterInfo.faceAccessoryColor;
+			if (currentCharacter.faceAccessoryParent.transform.childCount > 0)
+			{
+				foreach (Transform child in currentCharacter.faceAccessoryParent.transform)
+				{
+					Destroy(child.gameObject);
+				}
+			}
+			GameObject faceAccessory = Instantiate(currentCharacter.characterPartIndex.faceAccessorys[currentCharacter.characterInfo.faceAccessoryIndex], currentCharacter.faceAccessoryParent.transform);
+			faceAccessory.GetComponentInChildren<SkinnedMeshRenderer>().material.color = currentCharacter.characterInfo.faceAccessoryColor;
 		}
 	}
 
