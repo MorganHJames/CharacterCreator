@@ -5,8 +5,6 @@
 // Brief: Holds all the available parts for the character.
 //////////////////////////////////////////////////////////// 
 
-using System;
-using UnityEditor.Animations;
 using UnityEngine;
 
 /// <summary>
@@ -25,7 +23,7 @@ public class CharacterPartIndex : ScriptableObject
 	/// All of the animation controllers.
 	/// </summary>
 	[Tooltip("All of the animation controllers.")]
-	public AnimatorController[] animatorControllers;
+	public RuntimeAnimatorController[] animatorControllers;
 
 	/// <summary>
 	/// All of the hairstyle prefabs.
