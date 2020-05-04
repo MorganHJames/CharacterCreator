@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatorControllers:
   - {fileID: 9100000, guid: 930cead7a31bf1449bb3198a9bae9bc8, type: 2}
+  - {fileID: 9100000, guid: a463005c1e7bca04a9b0802d3d0bf59e, type: 2}
   hairstyles:
   - {fileID: 0}
   - {fileID: -5615838292978317392, guid: ea8725503318c8643b3b42c55105753f, type: 3}
